@@ -1,0 +1,77 @@
+name: Publicar catálogo
+
+# Publica el sitio y guarda una copia de los inmuebles publicados (catalogo.json)
+# para que la página abra al instante. Revisa cambios cada 10 minutos.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Traer los inmuebles publicados
+        id: datos
+        env:
+          API: https://script.google.com/macros/s/AKfycbzaBTfIC_Cvgz4ldBfY1Sc8QfHVQaH4N2GrzVk5AY3cg5VcNkHsWlxPJ1bOxKtxZZ1-/exec
+        run: |
+          mkdir -p sitio
+          cp index.html og.jpg apple-touch-icon.png sitio/
+          curl -fsSL --max-time 30 https://tu-lugar-ya.github.io/catalogo.json -o viejo.json || echo '{}' > viejo.json
+          if curl -fsSL --retry 3 --retry-delay 10 --max-time 120 "$API?api=catalogo" -o nuevo.json; then
+          python3 - <<'PY'
+          import json, datetime, os
+          ahora = datetime.datetime.now(datetime.timezone.utc)
+          d = json.load(open('nuevo.json'))
+          assert isinstance(d.get('inmuebles'), list) and d['inmuebles'] and not d.get('error'), 'Respuesta no válida'
+          try:
+              v = json.load(open('viejo.json'))
+          except Exception:
+              v = {}
+          base = lambda x: {k: x.get(k) for k in ('nombre', 'whatsapp', 'inmuebles')}
+          try:
+              edad = (ahora - datetime.datetime.strptime(v.get('_t', ''), '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=datetime.timezone.utc)).total_seconds()
+          except Exception:
+              edad = 1e9
+          cambio = base(d) != base(v) or edad > 12 * 3600
+          d['_t'] = ahora.strftime('%Y-%m-%dT%H:%M:%SZ')
+          json.dump(d, open('sitio/catalogo.json', 'w'), ensure_ascii=False, separators=(',', ':'))
+          open(os.environ['GITHUB_OUTPUT'], 'a').write('cambio=' + ('true' if cambio else 'false') + '\n')
+          print(len(d['inmuebles']), 'inmuebles; cambio:', cambio)
+          PY
+          else
+            cp viejo.json sitio/catalogo.json
+            echo "cambio=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Preparar Pages
+        if: github.event_name != 'schedule' || steps.datos.outputs.cambio == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Subir el sitio
+        if: github.event_name != 'schedule' || steps.datos.outputs.cambio == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: sitio
+
+      - name: Publicar
+        id: despliegue
+        if: github.event_name != 'schedule' || steps.datos.outputs.cambio == 'true'
+        uses: actions/deploy-pages@v5
