@@ -233,7 +233,7 @@ img{display:block}
   .ftog{display:block}
   .fil .sel{display:none;grid-column:1/-1}
   .fil.abierto .sel{display:block}
-  .grid{grid-template-columns:1fr;gap:30px}
+  .grid{grid-template-columns:1fr;gap:30px;padding-bottom:96px}
   .res{margin:26px 0 14px}
   .res h2{font-size:18px}
   .flo{right:16px;bottom:16px}
@@ -336,18 +336,50 @@ img{display:block}
   function linkDe(i) { return SITIO + '#' + i.c; }
 
   /* ---------- Fotos: enlace público rápido, con respaldo del servidor ---------- */
-  document.addEventListener('load', function (e) { var t = e.target; if (t && t.tagName === 'IMG') t.classList.add('ok'); }, true);
+  document.addEventListener('load', function (e) {
+    var t = e.target; if (!t || t.tagName !== 'IMG') return;
+    if (t.dataset.id && !t.dataset.rc) { t.dataset.rc = '1'; if (recortar(t)) return; }
+    t.classList.add('ok');
+  }, true);
+  /* Fotos con franjas blancas (fotos dentro de un marco): se recortan al mostrarlas, sin tocar el original */
+  function recortar(im) {
+    try {
+      var W = im.naturalWidth, H = im.naturalHeight; if (!W || !H) return false;
+      var w = 120, h = Math.max(12, Math.round(w * H / W));
+      var c = document.createElement('canvas'); c.width = w; c.height = h;
+      var x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(im, 0, 0, w, h);
+      var px = x.getImageData(0, 0, w, h).data;
+      var claro = function (o) { return px[o] > 236 && px[o + 1] > 236 && px[o + 2] > 236; };
+      var fila = function (y) { var n = 0; for (var i = 0; i < w; i++) if (claro((y * w + i) * 4)) n++; return n >= w * 0.98; };
+      var colu = function (k) { var n = 0; for (var j = 0; j < h; j++) if (claro((j * w + k) * 4)) n++; return n >= h * 0.98; };
+      var t = 0, b = 0, l = 0, r = 0;
+      while (t < h * 0.3 && fila(t)) t++;
+      while (b < h * 0.3 && fila(h - 1 - b)) b++;
+      while (l < w * 0.3 && colu(l)) l++;
+      while (r < w * 0.3 && colu(w - 1 - r)) r++;
+      var lim = function (v, n) { return v >= n * 0.04 ? v : 0; };
+      t = lim(t, h); b = lim(b, h); l = lim(l, w); r = lim(r, w);
+      if (!t && !b && !l && !r) return false;
+      var sy = t ? Math.ceil((t + 0.8) * H / h) : 0, ey = b ? H - Math.ceil((b + 0.8) * H / h) : H;
+      var sx = l ? Math.ceil((l + 0.8) * W / w) : 0, ex = r ? W - Math.ceil((r + 0.8) * W / w) : W;
+      if (ey - sy < H * 0.4 || ex - sx < W * 0.4) return false;
+      var cc = document.createElement('canvas'); cc.width = ex - sx; cc.height = ey - sy;
+      cc.getContext('2d').drawImage(im, sx, sy, ex - sx, ey - sy, 0, 0, ex - sx, ey - sy);
+      cc.toBlob(function (bl) { if (bl) im.src = URL.createObjectURL(bl); else im.classList.add('ok'); }, 'image/jpeg', 0.92);
+      return true;
+    } catch (e) { return false; }
+  }
   document.addEventListener('error', function (e) {
     var t = e.target; if (!t || t.tagName !== 'IMG' || !t.dataset.id) return;
     if (t.dataset.fb) { t.classList.add('bad'); return; }
     t.dataset.fb = '1';
     fetch(API + '?api=foto&id=' + encodeURIComponent(t.dataset.id) + '&w=' + (Number(t.dataset.w) > 600 ? 1400 : 480))
       .then(function (r) { return r.json(); })
-      .then(function (j) { if (j && j.u) t.src = j.u; else t.classList.add('bad'); })
+      .then(function (j) { if (j && j.u) { t.removeAttribute('crossorigin'); delete t.dataset.rc; t.src = j.u; } else t.classList.add('bad'); })
       .catch(function () { t.classList.add('bad'); });
   }, true);
   function foto(id, w, alt, perezosa) {
-    return '<img src="' + img(id, w) + '" data-id="' + esc(id) + '" data-w="' + w + '" alt="' + esc(alt || '') + '"' + (perezosa ? ' loading="lazy"' : '') + ' decoding="async" draggable="false">';
+    return '<img src="' + img(id, w) + '" crossorigin="anonymous" data-id="' + esc(id) + '" data-w="' + w + '" alt="' + esc(alt || '') + '"' + (perezosa ? ' loading="lazy"' : '') + ' decoding="async" draggable="false">';
   }
 
   /* ---------- Precios ---------- */
