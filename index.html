@@ -621,36 +621,48 @@ img{display:block}
   });
 
   /* ---------- Datos ---------- */
-  function usar(d, desdeCache) {
+  function usar(d) {
     d.inmuebles = (d.inmuebles || []).filter(function (i) { return i && i.c; });
     var antes = S.d ? JSON.stringify(S.d.inmuebles) : '';
     S.d = d;
-    if (d.whatsapp) {
+    if (d.whatsapp && !$('#cta-top').innerHTML) {
       $('#cta-top').innerHTML = '<button class="btn-o" type="button" data-wa="">' + WA + 'Escríbenos</button>';
       $('#flo').innerHTML = '<button class="flo" type="button" data-wa="" aria-label="Escríbenos por WhatsApp">' + WA + '</button>';
       var tel = String(d.whatsapp).replace(/^57/, '');
       $('#pie-wa').innerHTML = '<button class="pie-wa" type="button" data-wa="">WhatsApp ' + tel.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') + '</button>';
     }
-    if (!desdeCache && antes && antes === JSON.stringify(d.inmuebles)) return;
+    if (antes && antes === JSON.stringify(d.inmuebles)) return;
     pintarFiltros(); pintar();
     if (S.sel) { var i = buscar(S.sel.c); if (!i) cerrarFicha(); }
     else ruta();
   }
+  /* Orden: copia del navegador (si es de hoy) → copia del sitio (se actualiza sola cada 10 min) → datos en vivo */
   function cargar() {
-    var hayCache = false;
-    try { var c = JSON.parse(localStorage.getItem(CACHE) || 'null'); if (c && c.d && Date.now() - c.t < 864e5) { usar(c.d, true); hayCache = true; } } catch (e) {}
+    var tLocal = 0, vivo = false;
+    try { var c = JSON.parse(localStorage.getItem(CACHE) || 'null'); if (c && c.d && Date.now() - c.t < 864e5) { tLocal = c.t; usar(c.d); } } catch (e) {}
+    var copia = fetch('catalogo.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (vivo || !d || !Array.isArray(d.inmuebles) || !d.inmuebles.length) return;
+        var t = Date.parse(d._t || '') || 0;
+        if (Date.now() - t > 3 * 864e5 || t <= tLocal) return;
+        usar(d);
+      }).catch(function () {});
     fetch(API + '?api=catalogo', { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (d) {
         if (!d || d.error || !Array.isArray(d.inmuebles)) throw new Error('datos');
+        vivo = true;
         try { localStorage.setItem(CACHE, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {}
-        usar(d, false);
+        usar(d);
       })
       .catch(function () {
-        if (hayCache) return;
-        $('#cnt').textContent = 'No pudimos cargar los inmuebles';
-        $('#lista').innerHTML = '<div class="vacio"><b>Revisa tu conexión</b>Vuelve a intentarlo en un momento.<br><button class="btn-d" type="button" id="reint">Reintentar</button></div>';
-        $('#reint').addEventListener('click', function () { $('#cnt').textContent = 'Cargando inmuebles…'; cargar(); });
+        copia.then(function () {
+          if (S.d) return;
+          $('#cnt').textContent = 'No pudimos cargar los inmuebles';
+          $('#lista').innerHTML = '<div class="vacio"><b>Revisa tu conexión</b>Vuelve a intentarlo en un momento.<br><button class="btn-d" type="button" id="reint">Reintentar</button></div>';
+          $('#reint').addEventListener('click', function () { $('#cnt').textContent = 'Cargando inmuebles…'; cargar(); });
+        });
       });
   }
   try { var yo = JSON.parse(localStorage.getItem('tly_yo') || 'null'); if (yo && yo.nombre && yo.cel) S.yo = yo; } catch (e) {}
