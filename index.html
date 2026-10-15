@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tu Lugar Ya | Inmuebles en Cali</title>
+<meta name="description" content="Inmuebles para arrendar y comprar en Cali y alrededores. Mira las fotos y agenda tu visita por WhatsApp.">
+<meta name="theme-color" content="#01352E">
+<link rel="canonical" href="https://tu-lugar-ya.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tu Lugar Ya">
+<meta property="og:title" content="Tu Lugar Ya | Inmuebles en Cali">
+<meta property="og:description" content="Inmuebles para arrendar y comprar en Cali y alrededores. Mira las fotos y agenda tu visita.">
+<meta property="og:url" content="https://tu-lugar-ya.github.io/">
+<meta property="og:image" content="https://tu-lugar-ya.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_CO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -10 80 80'%3E%3Crect x='-8' y='-10' width='80' height='80' rx='18' fill='%2301352E'/%3E%3Cpath d='M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z' fill='%23fff'/%3E%3Cpath d='M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z' fill='%2306F2D4'/%3E%3Ccircle cx='52' cy='10' r='6' fill='%2306F2D4'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com">
+<link rel="preconnect" href="https://lh3.googleusercontent.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#01352E; --profundo:#013C30; --menta:#1CC99E; --aqua:#06F2D4; --blanco:#FBF9F7; --tinte:#D2EEE4;
+  --texto:#1D302B; --suave:#5B6F69; --linea:#E2EAE6; --hoja:#FFFFFF; --ambar:#FFF1C9; --ambar-t:#7A5A00;
+  --r-foto:18px; --r-ui:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html.lock{overflow:hidden}
+body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.5;color:var(--texto);background:var(--blanco);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+img{display:block}
+:focus-visible{outline:2px solid var(--menta);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Marca */
+.marca{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.marca svg{width:40px;height:36px;flex:none}
+.marca b{font-weight:700;font-size:21px;letter-spacing:-.3px}
+.marca b span{color:var(--aqua)}
+
+/* Portada */
+.top{background:var(--noche);color:#fff;position:relative;overflow:hidden}
+.iso{position:absolute;right:-90px;top:64px;width:520px;height:472px;pointer-events:none}
+.iso path{fill:#0A463D}.iso circle{fill:var(--aqua)}
+.bar{position:relative;display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.btn-o{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--aqua);background:transparent;color:var(--aqua);border-radius:999px;padding:9px 18px;font-weight:600;font-size:14px;text-decoration:none}
+.btn-o svg{width:18px;height:18px;fill:currentColor}
+.btn-o:hover{background:var(--aqua);color:var(--noche)}
+.hero{position:relative;padding:34px 0 92px;max-width:820px}
+.hero h1{margin:0;font-weight:300;font-size:clamp(34px,5.4vw,60px);line-height:1.04;letter-spacing:-.035em;text-wrap:balance}
+.hero p{margin:18px 0 0;color:#A9D6CD;font-size:17px;font-weight:400;max-width:520px;line-height:1.55}
+
+/* Filtros */
+.fil{position:relative;z-index:2;margin-top:-44px;background:var(--hoja);border-radius:16px;box-shadow:0 18px 40px rgba(1,53,46,.13),0 2px 6px rgba(1,53,46,.06);padding:12px;display:grid;grid-template-columns:auto repeat(4,minmax(0,1fr));gap:10px;align-items:center}
+.seg{display:flex;background:var(--blanco);border-radius:10px;padding:4px;border:1px solid var(--linea)}
+.seg button{border:0;background:none;padding:9px 16px;border-radius:7px;font-weight:600;font-size:14px;color:var(--suave);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--noche);color:#fff}
+.sel{position:relative;min-width:0}
+.sel select{appearance:none;-webkit-appearance:none;width:100%;border:1px solid var(--linea);border-radius:10px;padding:11px 34px 11px 14px;background:var(--hoja);font-weight:500;font-size:14px;color:var(--profundo);min-width:0;text-overflow:ellipsis}
+.sel::after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;border-right:1.5px solid var(--suave);border-bottom:1.5px solid var(--suave);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.sel select.on{border-color:var(--menta);background:#F1FBF7}
+.ftog{display:none;border:1px solid var(--linea);background:var(--hoja);border-radius:10px;padding:10px 14px;font-weight:600;font-size:14px;color:var(--profundo)}
+
+.res{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:34px 0 18px}
+.res h2{margin:0;font-size:20px;font-weight:600;color:var(--profundo);letter-spacing:-.2px}
+.res button{border:0;background:none;color:var(--profundo);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:0}
+
+/* Tarjetas */
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 26px;padding-bottom:72px}
+.card{position:relative;cursor:pointer;min-width:0}
+.media{position:relative;border-radius:var(--r-foto);overflow:hidden;background:var(--tinte);aspect-ratio:4/3;isolation:isolate}
+.car{display:flex;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.car::-webkit-scrollbar{display:none}
+.sl{flex:0 0 100%;height:100%;scroll-snap-align:center;scroll-snap-stop:always;position:relative}
+.sl img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
+.sl img.ok{opacity:1}
+.sl img.bad{display:none}
+.ph0{display:flex;align-items:center;justify-content:center}
+.ph0 svg{width:64px;height:58px;opacity:.35}
+.pill{position:absolute;top:12px;left:12px;z-index:2;background:var(--noche);color:#fff;font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:999px}
+.pill.rsv{left:auto;right:12px;background:var(--ambar);color:var(--ambar-t)}
+.arr{position:absolute;top:50%;z-index:2;width:36px;height:36px;margin-top:-18px;border-radius:50%;border:0;background:rgba(255,255,255,.94);color:var(--noche);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.16);opacity:0;transition:opacity .2s}
+.arr svg{width:16px;height:16px}
+.arr.l{left:10px}.arr.r{right:10px}
+.card:hover .arr,.gal:hover .arr{opacity:1}
+.arr:focus-visible{opacity:1}
+.dots{position:absolute;left:0;right:0;bottom:10px;z-index:2;display:flex;justify-content:center;gap:5px;pointer-events:none}
+.dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);transition:background .2s,transform .2s}
+.dots i.on{background:#fff;transform:scale(1.2)}
+.body{padding:14px 2px 0}
+.precio{font-size:22px;font-weight:700;color:var(--noche);letter-spacing:-.4px;line-height:1.2}
+.precio small{font-size:14px;font-weight:500;color:var(--suave);letter-spacing:0}
+.precio2{font-size:13.5px;color:var(--suave);margin-top:2px}
+.card h3{margin:8px 0 0;font-size:16px;font-weight:600;color:var(--texto);line-height:1.35}
+.card h3 a{text-decoration:none}
+.card .loc{font-size:14px;color:var(--suave)}
+.specs{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px;color:var(--suave);font-weight:500}
+.specs li{display:inline-flex;align-items:center;gap:6px}
+.specs svg{width:16px;height:16px;stroke:var(--menta);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sk .media{background:linear-gradient(100deg,#E4EFEA 30%,#F2F8F5 50%,#E4EFEA 70%);background-size:200% 100%;animation:sh 1.3s linear infinite}
+.sk i{display:block;height:12px;border-radius:6px;background:#E4EFEA;margin:12px 0 0}
+.sk i:first-child{height:18px;width:55%;margin-top:16px}.sk i:nth-child(2){width:80%}.sk i:nth-child(3){width:45%}
+@keyframes sh{to{background-position:-200% 0}}
+.vacio{grid-column:1/-1;background:var(--hoja);border:1px solid var(--linea);border-radius:16px;padding:48px 24px;text-align:center;color:var(--suave)}
+.vacio b{display:block;color:var(--profundo);font-size:18px;margin-bottom:6px}
+.vacio button{margin-top:16px}
+.btn-d{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--noche);color:#fff;border-radius:999px;padding:12px 22px;font-weight:600;font-size:14px}
+
+/* Ficha */
+.ov{position:fixed;inset:0;z-index:30;background:rgba(1,30,26,.72);display:flex;align-items:center;justify-content:center;padding:24px;animation:fi .2s ease}
+@keyframes fi{from{opacity:0}}
+.ficha{position:relative;background:var(--hoja);border-radius:20px;width:100%;max-width:1180px;height:min(800px,calc(100dvh - 48px));display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);overflow:hidden;animation:up .25s ease}
+@keyframes up{from{transform:translateY(14px);opacity:.6}}
+.cerrar{position:absolute;top:14px;right:14px;z-index:5;width:40px;height:40px;border-radius:50%;border:0;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;color:var(--noche)}
+.cerrar svg{width:18px;height:18px}
+.gal{position:relative;background:#0C1F1B;display:flex;flex-direction:column;min-height:0}
+.gal .vis{position:relative;flex:1;min-height:0}
+.gal .car .sl img{object-fit:cover;cursor:zoom-in}
+.cont{position:absolute;left:14px;bottom:14px;z-index:2;background:rgba(1,30,26,.78);color:#fff;font-size:12.5px;font-weight:600;padding:4px 11px;border-radius:999px}
+.wm{position:absolute;right:16px;bottom:14px;z-index:2;display:flex;align-items:center;gap:7px;color:#fff;pointer-events:none;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55));opacity:.9}
+.wm svg{width:30px;height:27px}
+.wm b{font-weight:700;font-size:15px;letter-spacing:-.2px}.wm b span{color:var(--aqua)}
+.thumbs{display:flex;gap:6px;padding:8px;overflow-x:auto;scrollbar-width:none;flex:none}
+.thumbs::-webkit-scrollbar{display:none}
+.thumbs button{flex:none;width:84px;height:62px;padding:0;border:0;border-radius:8px;overflow:hidden;background:#1C3531;opacity:.5;transition:opacity .2s}
+.thumbs button[aria-current="true"]{opacity:1;outline:2px solid var(--aqua);outline-offset:-2px}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.info{overflow-y:auto;padding:34px 34px 28px;display:flex;flex-direction:column;gap:0;min-height:0}
+.info .loc{font-size:14.5px;color:var(--suave);margin:0;padding-right:44px}
+.info h2{margin:6px 0 18px;font-size:28px;font-weight:600;line-height:1.15;letter-spacing:-.5px;color:var(--noche);padding-right:44px}
+.pp{background:var(--noche);color:#fff;border-radius:16px;padding:20px 22px 22px}
+.pp .precio{color:#fff;font-size:30px;font-weight:600}
+.pp .precio small{color:#A9D6CD}
+.pp .precio2{color:#A9D6CD;font-size:14px}
+.cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;border:0;margin-top:18px;background:var(--aqua);color:var(--noche);font-weight:700;font-size:15.5px;padding:14px 18px;border-radius:999px}
+.cta svg{width:20px;height:20px;fill:currentColor}
+.cta:hover{filter:brightness(.96)}
+.pp .sub{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;color:#A9D6CD}
+.lnk{border:0;background:none;color:#fff;font-weight:600;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;padding:4px 0}
+.lnk svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:14px 12px;margin:22px 0 4px;padding:0 0 22px;border-bottom:1px solid var(--linea)}
+.datos div{min-width:0}
+.datos dt{font-size:13px;color:var(--suave)}
+.datos dd{margin:2px 0 0;font-size:18px;font-weight:600;color:var(--noche)}
+.info h4{margin:22px 0 8px;font-size:15px;font-weight:600;color:var(--noche)}
+.desc{white-space:pre-line;color:#33504A;font-size:15px;line-height:1.7;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips span{background:#EEF7F3;color:var(--profundo);font-size:13.5px;font-weight:500;padding:6px 12px;border-radius:999px}
+.cod{margin-top:auto;padding-top:24px;font-size:13px;color:var(--suave)}
+.nota{background:var(--ambar);color:var(--ambar-t);padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;margin-bottom:16px}
+.barm{display:none}
+
+/* Visor de fotos */
+.lb{position:fixed;inset:0;z-index:40;background:#081613;display:flex;flex-direction:column}
+.lb .vis{position:relative;flex:1;min-height:0}
+.lb .sl img{object-fit:contain;cursor:default}
+.lb .cerrar{background:rgba(255,255,255,.95)}
+.lb .arr{opacity:1;width:44px;height:44px;margin-top:-22px}
+.lb .arr.l{left:16px}.lb .arr.r{right:16px}
+
+/* Formulario */
+.lf{position:fixed;inset:0;z-index:50;background:rgba(1,30,26,.72);display:flex;align-items:center;justify-content:center;padding:20px;animation:fi .2s ease}
+.lf form{position:relative;background:var(--hoja);border-radius:20px;width:100%;max-width:410px;padding:28px 26px 22px}
+.lf h3{margin:0 0 6px;font-size:22px;font-weight:600;color:var(--noche);letter-spacing:-.3px}
+.lf p{margin:0 0 14px;color:var(--suave);font-size:14.5px}
+.lf label{display:block;font-size:13.5px;font-weight:600;color:var(--profundo);margin:12px 0 6px}
+.lf input{width:100%;border:1px solid #CFDCD7;border-radius:12px;padding:13px 14px;font-size:16px;background:#fff}
+.lf input:focus{outline:2px solid var(--menta);border-color:var(--menta)}
+.lf .er{color:#B42318;font-size:13.5px;font-weight:500;min-height:20px;margin-top:10px}
+.lf .cta{margin-top:6px;background:#25D366;color:#fff}
+.lf small{display:block;text-align:center;color:var(--suave);font-size:12px;margin-top:12px}
+.lf .cerrar{top:12px;right:12px;width:36px;height:36px;box-shadow:none;background:var(--blanco)}
+
+.flo{position:fixed;right:20px;bottom:20px;z-index:20;width:58px;height:58px;border-radius:50%;border:0;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(1,53,46,.28)}
+.flo svg{width:28px;height:28px;fill:#fff}
+.toast{position:fixed;left:50%;bottom:28px;z-index:60;transform:translateX(-50%);background:var(--noche);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px);text-align:center}
+
+/* Pie */
+.pie{background:var(--noche);color:#A9D6CD}
+.pie .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:30px;padding-bottom:30px;font-size:14px}
+.pie a,.pie-wa{color:#fff;font-weight:600;text-decoration:none;border:0;background:none;padding:0;font-size:14px}
+.pie-wa:hover{text-decoration:underline;text-underline-offset:3px}
+
+@media (max-width:1020px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fil{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fil .seg{grid-column:1/-1}
+  .seg button{flex:1}
+}
+@media (max-width:860px){
+  .ov{padding:0;align-items:stretch}
+  .ficha{display:block;height:100dvh;max-height:none;border-radius:0;overflow-y:auto;overscroll-behavior:contain;animation:none}
+  .gal{display:block}
+  .gal .vis{aspect-ratio:4/3;flex:none}
+  .thumbs{display:none}
+  .info{overflow:visible;padding:22px 20px 110px}
+  .info h2{font-size:24px;padding-right:0}
+  .info .loc{padding-right:0}
+  .pp .cta,.pp .sub{display:none}
+  .pp{padding:16px 18px}
+  .pp .precio{font-size:26px}
+  .cerrar{position:fixed}
+  .barm{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:6;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:var(--hoja);box-shadow:0 -6px 20px rgba(1,53,46,.12)}
+  .barm .cta{margin:0;flex:1}
+  .barm .comp{flex:none;width:52px;height:52px;align-self:center;border-radius:50%;border:1px solid var(--linea);background:var(--hoja);display:flex;align-items:center;justify-content:center;color:var(--noche)}
+  .barm .comp svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .arr{display:none}
+  .lb .arr{display:flex}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .iso{width:300px;height:272px;right:-80px;top:70px;opacity:.9}
+  .iso circle{display:none}
+  .bar{padding:16px 0}
+  .marca svg{width:34px;height:31px}.marca b{font-size:19px}
+  .btn-o{padding:8px 14px;font-size:13px}
+  .hero{padding:16px 0 78px}
+  .hero p{font-size:15.5px;margin-top:12px}
+  .fil{grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:10px;margin-top:-50px}
+  .fil .seg{grid-column:1}
+  .seg button{padding:9px 6px;font-size:13.5px}
+  .ftog{display:block}
+  .fil .sel{display:none;grid-column:1/-1}
+  .fil.abierto .sel{display:block}
+  .grid{grid-template-columns:1fr;gap:30px}
+  .res{margin:26px 0 14px}
+  .res h2{font-size:18px}
+  .flo{right:16px;bottom:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <svg class="iso" viewBox="0 0 64 58" aria-hidden="true"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z"/><circle cx="52" cy="10" r="6"/></svg>
+  <div class="wrap">
+    <div class="bar">
+      <a class="marca" href="./" aria-label="Tu Lugar Ya, inicio"><svg viewBox="0 0 64 58" aria-hidden="true"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z" fill="#fff"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z" fill="#06F2D4"/><circle cx="52" cy="10" r="6" fill="#06F2D4"/></svg><b>Tu Lugar<span>Ya</span></b></a>
+      <span id="cta-top"></span>
+    </div>
+    <div class="hero">
+      <h1>Encuentra tu próximo lugar</h1>
+      <p>Inmuebles para arrendar y comprar en Cali y alrededores. Escoge el que te guste y agendamos tu visita.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="fil" id="fil" role="search">
+    <div class="seg" id="fOp" role="group" aria-label="Tipo de negocio">
+      <button type="button" data-v="" aria-pressed="true">Todos</button>
+      <button type="button" data-v="Arriendo" aria-pressed="false">Arrendar</button>
+      <button type="button" data-v="Venta" aria-pressed="false">Comprar</button>
+    </div>
+    <button class="ftog" id="ftog" type="button" aria-expanded="false" aria-controls="fil">Filtros</button>
+    <label class="sel"><span class="sr">Ciudad</span><select id="fCi"></select></label>
+    <label class="sel"><span class="sr">Tipo de inmueble</span><select id="fTi"></select></label>
+    <label class="sel"><span class="sr">Precio máximo</span><select id="fPr"></select></label>
+    <label class="sel"><span class="sr">Habitaciones</span><select id="fHa"></select></label>
+  </div>
+  <div class="res"><h2 id="cnt" aria-live="polite">Cargando inmuebles…</h2><span id="limpiar"></span></div>
+  <div class="grid" id="lista">
+    <div class="card sk" aria-hidden="true"><div class="media"></div><i></i><i></i><i></i></div>
+    <div class="card sk" aria-hidden="true"><div class="media"></div><i></i><i></i><i></i></div>
+    <div class="card sk" aria-hidden="true"><div class="media"></div><i></i><i></i><i></i></div>
+    <div class="card sk" aria-hidden="true"><div class="media"></div><i></i><i></i><i></i></div>
+    <div class="card sk" aria-hidden="true"><div class="media"></div><i></i><i></i><i></i></div>
+    <div class="card sk" aria-hidden="true"><div class="media"></div><i></i><i></i><i></i></div>
+  </div>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <a class="marca" href="./"><svg viewBox="0 0 64 58" aria-hidden="true"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z" fill="#fff"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z" fill="#06F2D4"/><circle cx="52" cy="10" r="6" fill="#06F2D4"/></svg><b>Tu Lugar<span>Ya</span></b></a>
+    <div>Inmobiliaria en Cali, Colombia</div>
+    <div id="pie-wa"></div>
+  </div>
+</footer>
+
+<div id="flo"></div>
+<div id="ficha"></div>
+<div id="visor"></div>
+<div id="form"></div>
+<div id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+  var API = 'https://script.google.com/macros/s/AKfycbzaBTfIC_Cvgz4ldBfY1Sc8QfHVQaH4N2GrzVk5AY3cg5VcNkHsWlxPJ1bOxKtxZZ1-/exec';
+  var SITIO = location.origin + location.pathname;
+  var CACHE = 'tly_cat_v1';
+  var S = { d: null, op: '', ci: '', ti: '', pr: '', ha: '', yo: null, sel: null, propio: false, pend: null };
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  var LOGO = '<path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z" fill="#fff"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z" fill="#06F2D4"/><circle cx="52" cy="10" r="6" fill="#06F2D4"/>';
+  var CASA = '<svg viewBox="0 0 64 58" aria-hidden="true"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z" fill="#01352E"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z" fill="#01352E"/></svg>';
+  var WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>';
+  var X = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  var IZQ = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+  var DER = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+  var COMP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>';
+  var IC = {
+    a: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
+    h: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6M3 15h18M6 10V7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v3"/></svg>',
+    b: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4zM6 12V6a2 2 0 0 1 4 0M7 19l-1 2M17 19l1 2"/></svg>',
+    p: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M5 16h14M5 16v2M19 16v2M5 11h14"/><circle cx="8" cy="13.5" r=".6"/><circle cx="16" cy="13.5" r=".6"/></svg>'
+  };
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function cop(n) { return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function copC(n) { return n >= 1e9 ? '$' + (n / 1e9).toFixed(n % 1e9 ? 1 : 0).replace('.', ',') + ' mil M' : n >= 1e6 ? '$' + (Math.round(n / 1e5) / 10).toString().replace('.', ',') + ' M' : cop(n); }
+  function num(n) { return String(n).replace('.', ','); }
+  function esV(i) { return String(i.n || '').indexOf('Venta') > -1; }
+  function esA(i) { return String(i.n || '').indexOf('rriendo') > -1; }
+  function uniq(a) { return a.filter(function (x, k) { return x && a.indexOf(x) === k; }).sort(function (p, q) { return p.localeCompare(q, 'es'); }); }
+  function buscar(c) { return (S.d && S.d.inmuebles || []).filter(function (x) { return x.c === c; })[0] || null; }
+  function negocio(i) { return esV(i) && esA(i) ? 'Venta y arriendo' : esV(i) ? 'Venta' : 'Arriendo'; }
+  function titulo(i) { return i.t + (i.b ? ' en ' + i.b : ''); }
+  function lugar(i) { return [i.b, i.ci].filter(Boolean).join(', '); }
+  function img(id, w) { return 'https://lh3.googleusercontent.com/d/' + encodeURIComponent(id) + '=w' + w; }
+  function linkDe(i) { return SITIO + '#' + i.c; }
+
+  /* ---------- Fotos: enlace público rápido, con respaldo del servidor ---------- */
+  document.addEventListener('load', function (e) { var t = e.target; if (t && t.tagName === 'IMG') t.classList.add('ok'); }, true);
+  document.addEventListener('error', function (e) {
+    var t = e.target; if (!t || t.tagName !== 'IMG' || !t.dataset.id) return;
+    if (t.dataset.fb) { t.classList.add('bad'); return; }
+    t.dataset.fb = '1';
+    fetch(API + '?api=foto&id=' + encodeURIComponent(t.dataset.id) + '&w=' + (Number(t.dataset.w) > 600 ? 1400 : 480))
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (j && j.u) t.src = j.u; else t.classList.add('bad'); })
+      .catch(function () { t.classList.add('bad'); });
+  }, true);
+  function foto(id, w, alt, perezosa) {
+    return '<img src="' + img(id, w) + '" data-id="' + esc(id) + '" data-w="' + w + '" alt="' + esc(alt || '') + '"' + (perezosa ? ' loading="lazy"' : '') + ' decoding="async" draggable="false">';
+  }
+
+  /* ---------- Precios ---------- */
+  function precios(i) {
+    var l = [], v = esV(i) && i.pv, a = esA(i) && i.pc;
+    var vH = v ? cop(i.pv) : '', aH = a ? cop(i.pc) + ' <small>/mes</small>' : '';
+    if (v && a) {
+      if (S.op === 'Venta') { l.push(vH); l.push('o en arriendo ' + cop(i.pc) + ' al mes'); }
+      else if (S.op === 'Arriendo') { l.push(aH); l.push('o en venta ' + cop(i.pv)); }
+      else { l.push(aH); l.push('o en venta ' + cop(i.pv)); }
+    } else if (v) l.push(vH);
+    else if (a) l.push(aH);
+    else l.push('<small>Consulta el precio</small>');
+    var ad = '';
+    if (a && S.op !== 'Venta') {
+      if (i.ai === 'Sí') ad = 'Administración incluida';
+      else if (i.ad) ad = '+ ' + cop(i.ad) + ' de administración';
+    }
+    var alt = a && i.ca && S.op !== 'Venta' ? 'Sin muebles: ' + cop(i.ca) + ' al mes' : '';
+    return { p: l[0], s: [l[1], ad, alt].filter(Boolean) };
+  }
+  function bloquePrecio(i) {
+    var r = precios(i);
+    return '<div class="precio">' + r.p + '</div>' + r.s.map(function (x) { return '<div class="precio2">' + x + '</div>'; }).join('');
+  }
+  function specs(i) {
+    var l = [];
+    if (i.a) l.push([IC.a, num(i.a) + ' m²']);
+    if (i.h) l.push([IC.h, i.h + ' hab.']);
+    if (i.ba) l.push([IC.b, i.ba + (i.ba == 1 ? ' baño' : ' baños')]);
+    if (i.pq) l.push([IC.p, i.pq + ' parq.']);
+    return l.length ? '<ul class="specs">' + l.map(function (x) { return '<li>' + x[0] + x[1] + '</li>'; }).join('') + '</ul>' : '';
+  }
+
+  /* ---------- Filtros ---------- */
+  var RA = [1e6, 1.5e6, 2e6, 3e6, 4e6, 6e6, 10e6], RV = [150e6, 250e6, 350e6, 500e6, 700e6, 1e9, 1.5e9];
+  function opts(l, v, ph) { return '<option value="">' + ph + '</option>' + l.map(function (x) { var k = Array.isArray(x) ? x[0] : x, t = Array.isArray(x) ? x[1] : x; return '<option value="' + esc(k) + '"' + (String(k) === String(v) ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join(''); }
+  function pintarFiltros() {
+    var L = S.d.inmuebles.filter(function (i) { return !S.op || (S.op === 'Venta' ? esV(i) : esA(i)); });
+    var ciu = uniq(L.map(function (i) { return i.ci; })), tip = uniq(L.map(function (i) { return i.t; }));
+    if (S.ci && ciu.indexOf(S.ci) < 0) S.ci = '';
+    if (S.ti && tip.indexOf(S.ti) < 0) S.ti = '';
+    $('#fCi').innerHTML = opts(ciu, S.ci, 'Todas las ciudades');
+    $('#fTi').innerHTML = opts(tip, S.ti, 'Todos los tipos');
+    var og = function (t, r, p, mes) { return '<optgroup label="' + t + '">' + r.map(function (x) { var v = p + ':' + x; return '<option value="' + v + '"' + (S.pr === v ? ' selected' : '') + '>Hasta ' + copC(x) + (mes ? ' al mes' : '') + '</option>'; }).join('') + '</optgroup>'; };
+    $('#fPr').innerHTML = '<option value="">Cualquier precio</option>' + (S.op === 'Venta' ? og('Venta', RV, 'V') : S.op === 'Arriendo' ? og('Arriendo', RA, 'A', true) : og('Arriendo', RA, 'A', true) + og('Venta', RV, 'V'));
+    $('#fHa').innerHTML = opts([[1, '1 habitación o más'], [2, '2 habitaciones o más'], [3, '3 habitaciones o más'], [4, '4 habitaciones o más']], S.ha, 'Habitaciones');
+    ['fCi', 'fTi', 'fPr', 'fHa'].forEach(function (id) { $('#' + id).classList.toggle('on', !!$('#' + id).value); });
+    var n = [S.ci, S.ti, S.pr, S.ha].filter(Boolean).length;
+    $('#ftog').textContent = n ? 'Filtros (' + n + ')' : 'Filtros';
+  }
+  function filtrar() {
+    return S.d.inmuebles.filter(function (i) {
+      if (S.op && !(S.op === 'Venta' ? esV(i) : esA(i))) return false;
+      if (S.ci && i.ci !== S.ci) return false;
+      if (S.ti && i.t !== S.ti) return false;
+      if (S.pr) { var m = String(S.pr).match(/^([AV]):(\d+)$/); if (m) { var lim = Number(m[2]); if (m[1] === 'A' ? !(esA(i) && i.pc && i.pc <= lim) : !(esV(i) && i.pv && i.pv <= lim)) return false; } }
+      if (S.ha && (i.h || 0) < Number(S.ha)) return false;
+      return true;
+    });
+  }
+
+  /* ---------- Lista ---------- */
+  function carrusel(fotos, w, alt, max) {
+    var f = fotos.slice(0, max || fotos.length);
+    if (!f.length) return '<div class="car"><div class="sl ph0">' + CASA + '</div></div>';
+    return '<div class="car" data-car>' + f.map(function (id, k) { return '<div class="sl">' + foto(id, w, k ? '' : alt, k > 0) + '</div>'; }).join('') + '</div>';
+  }
+  function tarjeta(i) {
+    var f = i.f || [], n = Math.min(f.length, 6);
+    return '<article class="card" data-c="' + esc(i.c) + '">' +
+      '<div class="media">' + carrusel(f, 720, titulo(i), 6) +
+      '<span class="pill">' + negocio(i) + '</span>' + (i.e === 'Reservado' ? '<span class="pill rsv">Reservado</span>' : '') +
+      (n > 1 ? '<button class="arr l" type="button" data-paso="-1" aria-label="Foto anterior">' + IZQ + '</button><button class="arr r" type="button" data-paso="1" aria-label="Foto siguiente">' + DER + '</button><div class="dots">' + Array(n + 1).join('<i></i>').replace('<i>', '<i class="on">') + '</div>' : '') +
+      '</div><div class="body">' + bloquePrecio(i) +
+      '<h3><a href="#' + esc(i.c) + '">' + esc(titulo(i)) + '</a></h3><div class="loc">' + esc(i.ci || '') + '</div>' + specs(i) + '</div></article>';
+  }
+  function pintar() {
+    var l = filtrar(), hay = [S.ci, S.ti, S.pr, S.ha].some(Boolean);
+    $('#cnt').textContent = l.length === 1 ? '1 inmueble disponible' : l.length + ' inmuebles disponibles';
+    $('#limpiar').innerHTML = hay ? '<button type="button" data-limpiar>Quitar filtros</button>' : '';
+    $('#lista').innerHTML = l.length ? l.map(tarjeta).join('') :
+      '<div class="vacio"><b>No hay inmuebles con esos filtros</b>Prueba con otros o escríbenos: te avisamos cuando llegue algo así.' + (hay ? '<br><button class="btn-d" type="button" data-limpiar>Quitar filtros</button>' : '') + '</div>';
+  }
+
+  /* ---------- Carruseles ---------- */
+  function idx(car) { return car.clientWidth ? Math.round(car.scrollLeft / car.clientWidth) : 0; }
+  function ir(car, k, suave) { car.scrollTo({ left: k * car.clientWidth, behavior: suave && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto' }); }
+  function marcar(car) {
+    var k = idx(car), cont = car.parentNode.parentNode;
+    var n = car.children.length;
+    $$('.dots i', cont).forEach(function (d, j) { d.classList.toggle('on', j === k); });
+    var c = $('.cont', cont); if (c) c.textContent = (k + 1) + ' de ' + n;
+    if (car.closest('#ficha')) {
+      S.k = k;
+      $$('#ficha .thumbs button').forEach(function (b, j) { b.setAttribute('aria-current', j === k ? 'true' : 'false'); if (j === k && b.scrollIntoView) { var t = b.parentNode; t.scrollLeft = Math.max(0, b.offsetLeft - t.clientWidth / 2 + b.clientWidth / 2); } });
+    }
+  }
+  var raf = 0;
+  document.addEventListener('scroll', function (e) {
+    var car = e.target; if (!car || !car.hasAttribute || !car.hasAttribute('data-car')) return;
+    cancelAnimationFrame(raf); raf = requestAnimationFrame(function () { marcar(car); });
+  }, true);
+
+  /* ---------- Ficha ---------- */
+  function limpiarDesc(s) {
+    var l = String(s || '').split(/\n/).map(function (x) { return x.trim(); });
+    while (l.length && !l[0]) l.shift();
+    if (l.length > 1 && l[0].indexOf(' | ') > -1) l.shift();
+    l = l.filter(function (x) { return !/^(💰|🏷|🛋|🏠|📩|💵|🏢)/.test(x) && !/^Tu Lugar Ya\s*\|/i.test(x) && !/^(Canon( de arrendamiento)?|Precio( de venta)?|Administración)\s*:/i.test(x); });
+    return l.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+  function chips(l) { return '<div class="chips">' + l.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div>'; }
+  function abrir(c) {
+    var i = buscar(c);
+    if (!i) { cerrarFicha(true); toast('Ese inmueble ya no está disponible. Te mostramos los demás.'); return; }
+    S.sel = i; S.k = 0;
+    var f = i.f || [], n = f.length;
+    var datos = [['Área', i.a ? num(i.a) + ' m²' : ''], ['Habitaciones', i.h], ['Baños', i.ba], ['Parqueaderos', i.pq], ['Estrato', i.es]]
+      .filter(function (x) { return x[1]; }).map(function (x) { return '<div><dt>' + x[0] + '</dt><dd>' + esc(x[1]) + '</dd></div>'; }).join('');
+    var d = limpiarDesc(i.d);
+    var tipoNeg = i.t + (esV(i) && esA(i) ? ' en venta o arriendo' : esV(i) ? ' en venta' : ' en arriendo');
+    var ctaTxt = i.e === 'Reservado' ? 'Preguntar por WhatsApp' : 'Agendar visita por WhatsApp';
+    $('#ficha').innerHTML = '<div class="ov" data-cerrar-ov><div class="ficha" role="dialog" aria-modal="true" aria-label="' + esc(tipoNeg + ', ' + lugar(i)) + '">' +
+      '<button class="cerrar" type="button" data-cerrar aria-label="Cerrar">' + X + '</button>' +
+      '<div class="gal"><div class="vis">' + carrusel(f, 1600, tipoNeg) +
+      (n > 1 ? '<button class="arr l" type="button" data-paso="-1" aria-label="Foto anterior">' + IZQ + '</button><button class="arr r" type="button" data-paso="1" aria-label="Foto siguiente">' + DER + '</button><span class="cont">1 de ' + n + '</span>' : '') +
+      (n ? '<span class="wm" aria-hidden="true"><svg viewBox="0 0 64 58">' + LOGO + '</svg><b>Tu Lugar<span>Ya</span></b></span>' : '') + '</div>' +
+      (n > 1 ? '<div class="thumbs">' + f.map(function (id, k) { return '<button type="button" data-k="' + k + '" aria-label="Foto ' + (k + 1) + '" aria-current="' + (k ? 'false' : 'true') + '">' + foto(id, 240, '', k > 5) + '</button>'; }).join('') + '</div>' : '') + '</div>' +
+      '<div class="info">' + (i.e === 'Reservado' ? '<div class="nota">Este inmueble está reservado. Escríbenos y te avisamos si se libera, o te mostramos opciones parecidas.</div>' : '') +
+      '<p class="loc">' + esc(lugar(i)) + '</p><h2>' + esc(tipoNeg) + '</h2>' +
+      '<div class="pp">' + bloquePrecio(i) +
+      (S.d.whatsapp ? '<button class="cta" type="button" data-wa="' + esc(i.c) + '">' + WA + ctaTxt + '</button>' : '') +
+      '<div class="sub"><span>Te respondemos por WhatsApp</span><button class="lnk" type="button" data-compartir>' + COMP + 'Compartir</button></div></div>' +
+      (datos ? '<dl class="datos">' + datos + '</dl>' : '') +
+      (d ? '<h4>Descripción</h4><div class="desc">' + esc(d) + '</div>' : '') +
+      (i.x && i.x.length ? '<h4>Características</h4>' + chips(i.x) : '') +
+      (i.z && i.z.length ? '<h4>Zonas comunes</h4>' + chips(i.z) : '') +
+      '<p class="cod">Código ' + esc(i.c) + '</p></div>' +
+      '<div class="barm">' + (S.d.whatsapp ? '<button class="cta" type="button" data-wa="' + esc(i.c) + '">' + WA + (i.e === 'Reservado' ? 'Preguntar por WhatsApp' : 'Agendar visita') + '</button>' : '') + '<button class="comp" type="button" data-compartir aria-label="Compartir">' + COMP + '</button></div>' +
+      '</div></div>';
+    document.documentElement.classList.add('lock');
+    document.title = tipoNeg + ' | Tu Lugar Ya';
+    var b = $('#ficha .cerrar'); if (b) b.focus({ preventScroll: true, focusVisible: false });
+  }
+  function cerrarFicha(soloLimpiar) {
+    if (!$('#ficha').innerHTML) { if (soloLimpiar && location.hash) history.replaceState(null, '', SITIO); return; }
+    $('#ficha').innerHTML = ''; $('#visor').innerHTML = '';
+    document.documentElement.classList.remove('lock');
+    document.title = 'Tu Lugar Ya | Inmuebles en Cali';
+    var c = S.sel && S.sel.c; S.sel = null;
+    if (location.hash) history.replaceState(null, '', SITIO);
+    var t = c && $('.card[data-c="' + c + '"] h3 a'); if (t) t.focus({ preventScroll: true });
+  }
+  function pedirCerrar() {
+    if (S.propio) { S.propio = false; history.back(); } else cerrarFicha();
+  }
+  function ruta() {
+    if (!S.d) return;
+    var c = decodeURIComponent(location.hash.slice(1));
+    if (c && /^[A-Za-z]+-\d+$/.test(c)) { if (!S.sel || S.sel.c !== c) abrir(c); }
+    else if (S.sel) { S.propio = false; cerrarFicha(); }
+  }
+  window.addEventListener('hashchange', ruta);
+
+  /* ---------- Visor de fotos ---------- */
+  function abrirVisor(k) {
+    var i = S.sel, f = i.f || [], n = f.length; if (!n) return;
+    $('#visor').innerHTML = '<div class="lb" role="dialog" aria-modal="true" aria-label="Fotos"><button class="cerrar" type="button" data-cerrar-visor aria-label="Cerrar fotos">' + X + '</button>' +
+      '<div class="vis">' + carrusel(f, 1600, '') + (n > 1 ? '<button class="arr l" type="button" data-paso="-1" aria-label="Foto anterior">' + IZQ + '</button><button class="arr r" type="button" data-paso="1" aria-label="Foto siguiente">' + DER + '</button>' : '') +
+      '<span class="cont">' + (k + 1) + ' de ' + n + '</span><span class="wm" aria-hidden="true"><svg viewBox="0 0 64 58">' + LOGO + '</svg><b>Tu Lugar<span>Ya</span></b></span></div></div>';
+    var car = $('#visor .car');
+    requestAnimationFrame(function () { ir(car, k, false); marcar(car); });
+    $('#visor .cerrar').focus({ preventScroll: true, focusVisible: false });
+  }
+  function cerrarVisor() {
+    var car = $('#visor .car'), k = car ? idx(car) : 0;
+    $('#visor').innerHTML = '';
+    var g = $('#ficha .gal .car'); if (g) ir(g, k, false);
+  }
+
+  /* ---------- WhatsApp y "Me interesa" ---------- */
+  function textoWA(i) {
+    var yo = S.yo ? 'Hola, soy ' + S.yo.nombre + '. ' : 'Hola. ';
+    return i ? yo + 'Me interesa el inmueble ' + i.c + ' (' + titulo(i) + (i.ci ? ', ' + i.ci : '') + ') que vi en el catálogo de Tu Lugar Ya: ' + linkDe(i)
+      : yo + 'Vi el catálogo de Tu Lugar Ya y quiero más información.';
+  }
+  function abrirWA(i) {
+    var a = document.createElement('a');
+    a.href = 'https://wa.me/' + S.d.whatsapp + '?text=' + encodeURIComponent(textoWA(i));
+    a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove();
+  }
+  function registrar(c) {
+    try {
+      fetch(API, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ nombre: S.yo.nombre, celular: S.yo.cel, codigo: c || '', op: S.op }) }).catch(function () {});
+    } catch (e) {}
+  }
+  function interes(c) {
+    var i = c ? buscar(c) : null;
+    if (S.yo) { registrar(c); abrirWA(i); return; }
+    S.pend = c || '';
+    $('#form').innerHTML = '<div class="lf" data-cerrar-form><form novalidate><button class="cerrar" type="button" data-cerrar-form aria-label="Cerrar">' + X + '</button>' +
+      '<h3>' + (i ? 'Agenda tu visita' : 'Hablemos por WhatsApp') + '</h3><p>Déjanos tu nombre y celular para atenderte mejor' + (i ? ' con el inmueble ' + esc(i.c) : '') + '.</p>' +
+      '<label for="lfN">Nombre</label><input id="lfN" name="nombre" autocomplete="name" maxlength="80" required>' +
+      '<label for="lfC">Celular</label><input id="lfC" name="celular" inputmode="tel" autocomplete="tel" placeholder="300 123 4567" maxlength="16" required>' +
+      '<div class="er" id="lfE" role="alert"></div><button class="cta" type="submit">' + WA + 'Continuar a WhatsApp</button>' +
+      '<small>Solo usamos tus datos para contactarte sobre inmuebles.</small></form></div>';
+    setTimeout(function () { var n = $('#lfN'); if (n) n.focus(); }, 30);
+  }
+  function enviarForm() {
+    var n = $('#lfN').value.replace(/\s+/g, ' ').trim(), c = $('#lfC').value.replace(/\D/g, '');
+    if (c.length === 12 && c.indexOf('57') === 0) c = c.slice(2);
+    if (n.length < 2) { $('#lfE').textContent = 'Escribe tu nombre.'; $('#lfN').focus(); return; }
+    if (!/^3\d{9}$/.test(c)) { $('#lfE').textContent = 'Escribe un celular de 10 dígitos que empiece por 3.'; $('#lfC').focus(); return; }
+    S.yo = { nombre: n, cel: c };
+    try { localStorage.setItem('tly_yo', JSON.stringify(S.yo)); } catch (e) {}
+    var cod = S.pend, i = cod ? buscar(cod) : null;
+    $('#form').innerHTML = '';
+    registrar(cod); abrirWA(i);
+  }
+  function compartir() {
+    var i = S.sel; if (!i) return;
+    var url = linkDe(i), txt = titulo(i) + (i.ci ? ', ' + i.ci : '') + ' — Tu Lugar Ya';
+    if (navigator.share && matchMedia('(pointer: coarse)').matches) { navigator.share({ title: txt, text: txt, url: url }).catch(function () {}); return; }
+    var ok = function () { toast('Link copiado. Pégalo donde quieras compartirlo.'); };
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(ok, function () { prompt('Copia el link:', url); });
+    else prompt('Copia el link:', url);
+  }
+  var tt = 0;
+  function toast(m) { $('#toast').innerHTML = '<div class="toast" role="status">' + esc(m) + '</div>'; clearTimeout(tt); tt = setTimeout(function () { $('#toast').innerHTML = ''; }, 3800); }
+
+  /* ---------- Eventos ---------- */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.closest('[data-cerrar-form]') && (t.closest('button[data-cerrar-form]') || t.hasAttribute('data-cerrar-form'))) { $('#form').innerHTML = ''; return; }
+    if (t.closest('#form')) return;
+    var w = t.closest('[data-wa]'); if (w) { interes(w.getAttribute('data-wa')); return; }
+    if (t.closest('[data-compartir]')) { compartir(); return; }
+    if (t.closest('[data-limpiar]')) { S.ci = S.ti = S.pr = S.ha = ''; pintarFiltros(); pintar(); return; }
+    if (t.closest('#ftog')) { var fl = $('#fil'); fl.classList.toggle('abierto'); $('#ftog').setAttribute('aria-expanded', fl.classList.contains('abierto')); return; }
+    var op = t.closest('#fOp button');
+    if (op) { S.op = op.getAttribute('data-v'); S.pr = ''; $$('#fOp button').forEach(function (b) { b.setAttribute('aria-pressed', b === op ? 'true' : 'false'); }); pintarFiltros(); pintar(); return; }
+    var paso = t.closest('[data-paso]');
+    if (paso) { e.preventDefault(); e.stopPropagation(); var car = $('[data-car]', paso.parentNode); var n = car.children.length; ir(car, (idx(car) + Number(paso.getAttribute('data-paso')) + n) % n, true); return; }
+    if (t.closest('[data-cerrar-visor]')) { cerrarVisor(); return; }
+    if (t.closest('#visor')) return;
+    var th = t.closest('.thumbs button'); if (th) { ir($('#ficha .gal .car'), Number(th.getAttribute('data-k')), true); return; }
+    if (t.closest('#ficha .gal .car img')) { abrirVisor(idx($('#ficha .gal .car'))); return; }
+    if (t.closest('[data-cerrar]') || t.hasAttribute('data-cerrar-ov')) { pedirCerrar(); return; }
+    var a = t.closest('.card h3 a'); if (a) { e.preventDefault(); }
+    var c = t.closest('.card[data-c]');
+    if (c) { S.propio = true; location.hash = c.getAttribute('data-c'); }
+  });
+  document.addEventListener('submit', function (e) { if (e.target.closest('#form')) { e.preventDefault(); enviarForm(); } });
+  document.addEventListener('keydown', function (e) {
+    if ($('#form').innerHTML) { if (e.key === 'Escape') $('#form').innerHTML = ''; return; }
+    var lbCar = $('#visor .car');
+    if (lbCar) {
+      if (e.key === 'Escape') { cerrarVisor(); return; }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = lbCar.children.length; ir(lbCar, (idx(lbCar) + (e.key === 'ArrowRight' ? 1 : -1) + n) % n, true); }
+      return;
+    }
+    if (!S.sel) return;
+    if (e.key === 'Escape') { pedirCerrar(); return; }
+    var g = $('#ficha .gal .car');
+    if (g && (e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) { var m = g.children.length; ir(g, (idx(g) + (e.key === 'ArrowRight' ? 1 : -1) + m) % m, true); }
+  });
+  ['fCi', 'fTi', 'fPr', 'fHa'].forEach(function (id) {
+    $('#' + id).addEventListener('change', function (e) { S[{ fCi: 'ci', fTi: 'ti', fPr: 'pr', fHa: 'ha' }[id]] = e.target.value; pintarFiltros(); pintar(); });
+  });
+
+  /* ---------- Datos ---------- */
+  function usar(d, desdeCache) {
+    d.inmuebles = (d.inmuebles || []).filter(function (i) { return i && i.c; });
+    var antes = S.d ? JSON.stringify(S.d.inmuebles) : '';
+    S.d = d;
+    if (d.whatsapp) {
+      $('#cta-top').innerHTML = '<button class="btn-o" type="button" data-wa="">' + WA + 'Escríbenos</button>';
+      $('#flo').innerHTML = '<button class="flo" type="button" data-wa="" aria-label="Escríbenos por WhatsApp">' + WA + '</button>';
+      var tel = String(d.whatsapp).replace(/^57/, '');
+      $('#pie-wa').innerHTML = '<button class="pie-wa" type="button" data-wa="">WhatsApp ' + tel.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3') + '</button>';
+    }
+    if (!desdeCache && antes && antes === JSON.stringify(d.inmuebles)) return;
+    pintarFiltros(); pintar();
+    if (S.sel) { var i = buscar(S.sel.c); if (!i) cerrarFicha(); }
+    else ruta();
+  }
+  function cargar() {
+    var hayCache = false;
+    try { var c = JSON.parse(localStorage.getItem(CACHE) || 'null'); if (c && c.d && Date.now() - c.t < 864e5) { usar(c.d, true); hayCache = true; } } catch (e) {}
+    fetch(API + '?api=catalogo', { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) {
+        if (!d || d.error || !Array.isArray(d.inmuebles)) throw new Error('datos');
+        try { localStorage.setItem(CACHE, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {}
+        usar(d, false);
+      })
+      .catch(function () {
+        if (hayCache) return;
+        $('#cnt').textContent = 'No pudimos cargar los inmuebles';
+        $('#lista').innerHTML = '<div class="vacio"><b>Revisa tu conexión</b>Vuelve a intentarlo en un momento.<br><button class="btn-d" type="button" id="reint">Reintentar</button></div>';
+        $('#reint').addEventListener('click', function () { $('#cnt').textContent = 'Cargando inmuebles…'; cargar(); });
+      });
+  }
+  try { var yo = JSON.parse(localStorage.getItem('tly_yo') || 'null'); if (yo && yo.nombre && yo.cel) S.yo = yo; } catch (e) {}
+  cargar();
+})();
+</script>
+</body>
+</html>
