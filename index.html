@@ -568,6 +568,8 @@ img.bad{visibility:hidden}
 .pie-m .pie-lema span{color:var(--aqua);font-weight:500}
 .pie-m p{margin:0;max-width:310px;font-size:14px;line-height:1.55}
 .pie-c span{display:block;font-size:14px;padding:4px 0}
+.pie-mail{display:block;font-size:14px;padding:4px 0;color:inherit;text-decoration:none}.pie-mail:hover{text-decoration:underline}
+.pol a{color:var(--profundo)}
 .pie-b{border-top:1px solid rgba(255,255,255,.08);padding-top:16px;padding-bottom:24px;font-size:12.5px;color:#7FA59C}
 
 /* Propietarios: franja superior, tarjeta en la portada y aviso dentro de la lista */
@@ -903,7 +905,7 @@ img.bad{visibility:hidden}
       <p>Inmobiliaria en Cali, Colombia. Apartamentos, casas, locales y oficinas para arrendar y comprar.</p></div>
     <div><h4>Busca</h4><button type="button" data-filtro-op="Arriendo">Arrendar</button><button type="button" data-filtro-op="Venta">Comprar</button><button type="button" data-guia>Ayúdame a encontrarlo</button><button type="button" data-avisa>Avísame cuando llegue</button></div>
     <div><h4>Propietarios</h4><button type="button" data-prop="Vender">Vender mi inmueble</button><button type="button" data-prop="Arrendar">Arrendar mi inmueble</button><button type="button" data-prop="Vender o arrendar">Vender o arrendar</button></div>
-    <div class="pie-c" id="contacto"><h4>Contacto</h4><div id="pie-wa"></div><span>Cali, Valle del Cauca</span></div>
+    <div class="pie-c" id="contacto"><h4>Contacto</h4><div id="pie-wa"></div><a class="pie-mail" href="mailto:tulugarya@gmail.com">tulugarya@gmail.com</a><span>Cali, Valle del Cauca</span></div>
   </div>
   <div class="wrap pie-b">© 2026 Tu Lugar Ya · Precios y disponibilidad sujetos a cambios. La dirección exacta se comparte al confirmar la visita. · <button type="button" class="lnkp" data-politica>Política de datos</button></div>
 </footer>
@@ -2042,12 +2044,12 @@ img.bad{visibility:hidden}
     var tel = waNum().replace(/^57/, '').replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3');
     $('#pol').innerHTML = '<div class="pol" data-cerrar-pol><div class="box" role="dialog" aria-modal="true" aria-label="Política de tratamiento de datos"><button class="cerrar" type="button" data-cerrar-pol aria-label="Cerrar">' + X + '</button>' +
       '<h3>Política de tratamiento de datos personales</h3><p class="pv">Vigente desde el 19 de octubre de 2026</p>' +
-      '<h4>Responsable</h4><p>Tu Lugar Ya, inmobiliaria con domicilio en Cali, Valle del Cauca, Colombia. Contacto: WhatsApp ' + tel + '.</p>' +
+      '<h4>Responsable</h4><p>Tu Lugar Ya, inmobiliaria con domicilio en Cali, Valle del Cauca, Colombia. Contacto: WhatsApp ' + tel + ' y correo <a href="mailto:tulugarya@gmail.com">tulugarya@gmail.com</a>.</p>' +
       '<h4>Qué datos recogemos</h4><p>Tu nombre y tu celular cuando nos escribes, descargas una ficha, nos dejas una búsqueda o nos cuentas de tu inmueble, y lo que tú mismo nos cuentes de lo que buscas o de tu inmueble (tipo, zona, precio, mensaje). No pedimos datos sensibles ni datos de menores de edad.</p>' +
       '<h4>Para qué los usamos</h4><ul><li>Contactarte por WhatsApp o llamada sobre los inmuebles que te interesan o sobre el inmueble que quieres vender o arrendar.</li><li>Avisarte cuando llegue un inmueble parecido a lo que buscas.</li><li>Coordinar visitas y enviarte la información que nos pediste.</li><li>Llevar el registro interno de clientes y propietarios.</li></ul>' +
       '<p>No vendemos ni cedemos tus datos: solo los usa el equipo de Tu Lugar Ya. Los guardamos en herramientas de Google, que pueden almacenarlos en servidores fuera de Colombia.</p>' +
       '<h4>Tus derechos</h4><p>Según la Ley 1581 de 2012 puedes conocer, actualizar y corregir tus datos; pedir prueba de tu autorización; saber cómo los usamos; revocar la autorización o pedir que los borremos, cuando no haya un deber legal o contractual de conservarlos; acceder a ellos gratis, y presentar quejas ante la Superintendencia de Industria y Comercio después de hacer tu reclamo con nosotros.</p>' +
-      '<h4>Cómo ejercerlos</h4><p>Escríbenos por WhatsApp al ' + tel + ' con tu nombre, tu celular y lo que necesitas. Respondemos las consultas en máximo 10 días hábiles y los reclamos (corregir, borrar o revocar) en máximo 15 días hábiles; si necesitamos más tiempo, te avisamos antes.</p>' +
+      '<h4>Cómo ejercerlos</h4><p>Escríbenos por WhatsApp al ' + tel + ' o al correo tulugarya@gmail.com con tu nombre, tu celular y lo que necesitas. Respondemos las consultas en máximo 10 días hábiles y los reclamos (corregir, borrar o revocar) en máximo 15 días hábiles; si necesitamos más tiempo, te avisamos antes.</p>' +
       '<h4>Cuánto tiempo los guardamos</h4><p>Mientras tengamos una relación contigo o hasta que nos pidas borrarlos.</p>' +
       '<h4>En este dispositivo</h4><p>La página guarda en tu navegador tus favoritos y, si nos escribiste, tu nombre y celular para no pedírtelos otra vez. Puedes borrarlos en cualquier formulario con "¿No eres tú? Borrar mis datos". Las visitas a la página se cuentan de forma anónima, sin tu nombre ni tu número.</p>' +
       '<p>Al enviarnos tus datos en esta página aceptas esta política.</p>' +
