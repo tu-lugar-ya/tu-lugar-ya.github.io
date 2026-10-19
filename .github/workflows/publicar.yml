@@ -1,7 +1,8 @@
 name: Publicar catálogo
 
 # Publica el sitio y guarda una copia de los inmuebles publicados (catalogo.json)
-# para que la página abra al instante. Revisa cambios cada 10 minutos.
+# para que la página abra al instante. Crea una página por inmueble (/i/TLY-0001/)
+# con su foto y precio para WhatsApp y Google. Revisa cambios cada 10 minutos.
 on:
   push:
     branches: [main]
@@ -60,6 +61,10 @@ jobs:
             cp viejo.json sitio/catalogo.json
             echo "cambio=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Páginas por inmueble, sitemap y 404
+        run: |
+          if [ -f paginas.py ]; then python3 paginas.py sitio; else echo "Sin paginas.py"; fi
 
       - name: Preparar Pages
         if: github.event_name != 'schedule' || steps.datos.outputs.cambio == 'true'
