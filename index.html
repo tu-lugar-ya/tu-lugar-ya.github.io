@@ -924,7 +924,7 @@ img.bad{visibility:hidden}
 (function () {
   'use strict';
   var API = 'https://script.google.com/macros/s/AKfycbzaBTfIC_Cvgz4ldBfY1Sc8QfHVQaH4N2GrzVk5AY3cg5VcNkHsWlxPJ1bOxKtxZZ1-/exec';
-  var SITIO = location.origin + location.pathname;
+  var SITIO = location.origin + location.pathname.replace(/\/i\/[^\/]+\/?$/, '/');
   var WA_RESPALDO = '573202107143', PENDK = 'tly_pend', PDK = 'tly_pdraft';
   var CACHE = 'tly_cat_v1', FAVK = 'tly_fav';
   var RED = false; try { RED = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
@@ -989,7 +989,8 @@ img.bad{visibility:hidden}
   function titulo(i) { return i.t + (i.b ? ' en ' + i.b : ''); }
   function lugar(i) { return [i.b, i.ci].filter(Boolean).join(', '); }
   function img(id, w) { return 'https://lh3.googleusercontent.com/d/' + encodeURIComponent(id) + '=w' + w; }
-  function linkDe(i) { return SITIO + '#' + i.c; }
+  /* Link para compartir: página propia del inmueble (muestra su foto y precio en WhatsApp) */
+  function linkDe(i) { return SITIO + 'i/' + encodeURIComponent(i.c) + '/'; }
   function primer(n) { return String(n || '').trim().split(/\s+/)[0]; }
   function precioCorto(i) { return esA(i) && i.pc && S.op !== 'Venta' ? cop(i.pc) + '/mes' : esV(i) && i.pv ? cop(i.pv) : esA(i) && i.pc ? cop(i.pc) + '/mes' : 'Consultar'; }
   function bloquear() { document.documentElement.classList.toggle('lock', !!($('#pol').innerHTML || $('#ficha').innerHTML || $('#guia').innerHTML || $('#prop').innerHTML || $('#cajon').innerHTML || $('#comp').innerHTML)); }
@@ -1325,7 +1326,7 @@ img.bad{visibility:hidden}
       '<div class="barm"><button class="comp hf' + (fv ? ' on' : '') + '" type="button" data-fav="' + esc(i.c) + '" aria-pressed="' + fv + '" aria-label="Guardar en favoritos">' + HEART + '</button>' + (ce ? '<button class="cta" type="button" data-avisa-c="' + esc(i.c) + '">Quiero uno parecido</button>' : '<button class="cta" type="button" data-wa="' + esc(i.c) + '">' + WA + (i.e === 'Reservado' ? 'Preguntar' : 'Solicitar visita') + '</button>') + '<button class="comp" type="button" data-compartir aria-label="Compartir">' + COMP + '</button></div>' +
       '</div></div>';
     bloquear(); calcSim(); vista(i.c);
-    document.title = tipoNeg + ' | Tu Lugar Ya';
+    document.title = tipoNeg + ' en ' + lugar(i) + ' | Tu Lugar Ya';
     var b = $('#ficha .cerrar'); if (b) b.focus({ preventScroll: true, focusVisible: false });
   }
   function cerrarFicha(soloLimpiar) {
