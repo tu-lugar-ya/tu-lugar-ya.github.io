@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tu Lugar Ya | Inmuebles en Cali</title>
-<meta name="description" content="Inmuebles para arrendar y comprar en Cali y alrededores. Mira las fotos y agenda tu visita por WhatsApp.">
+<meta name="description" content="Inmuebles para arrendar y comprar en Cali y alrededores. ¿Tienes un inmueble? Véndelo o arriéndalo con Tu Lugar Ya: fotos, publicación, visitas y papeles.">
 <meta name="theme-color" content="#01352E">
 <link rel="canonical" href="https://tu-lugar-ya.github.io/">
 <meta property="og:type" content="website">
@@ -545,7 +545,50 @@ img.bad{visibility:hidden}
 .pie-c span{display:block;font-size:14px;padding:4px 0}
 .pie-b{border-top:1px solid rgba(255,255,255,.08);padding-top:16px;padding-bottom:24px;font-size:12.5px;color:#7FA59C}
 
+/* Propietarios: franja superior, tarjeta en la portada y aviso dentro de la lista */
+.tira{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;background:var(--aqua);color:var(--noche);font-size:14px;font-weight:600;padding:10px 16px;text-align:center;flex-wrap:wrap;line-height:1.35}
+.tira b{font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.tira-d{width:8px;height:8px;border-radius:50%;background:var(--noche);animation:late2 1.6s ease-in-out infinite;flex:none}
+@keyframes late2{50%{transform:scale(1.5);opacity:.45}}
+.tira:hover{filter:brightness(.97)}
+.tira .tc{display:none}
+.hero-g{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:center}
+.hdue{position:relative;background:rgba(255,255,255,.06);border:1.5px solid rgba(6,242,212,.38);border-radius:22px;padding:24px 22px 16px;margin-bottom:96px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 20px 50px rgba(0,0,0,.2)}
+.hdue::before{content:"";position:absolute;top:-10px;right:24px;width:20px;height:20px;border-radius:50%;background:var(--aqua);box-shadow:0 0 0 6px rgba(6,242,212,.18)}
+.hdue .kick{color:var(--aqua)}
+.hdue h2{margin:8px 0 6px;font-size:23px;font-weight:600;line-height:1.2;letter-spacing:-.4px;color:#fff;text-wrap:balance}
+.hdue p{margin:0 0 16px;color:#A9D6CD;font-size:14.5px;line-height:1.5}
+.hdue-op{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.hdue-op button{display:flex;flex-direction:column;align-items:center;gap:6px;border:0;background:var(--aqua);color:var(--noche);border-radius:14px;padding:13px 6px 11px;font-weight:700;font-size:14px;transition:transform .2s,filter .2s}
+.hdue-op button:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.hdue-op svg,.dueb-op svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hdue small{display:block;text-align:center;margin-top:12px;color:#8FB8AF;font-size:12.5px}
+.dueb{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:linear-gradient(120deg,var(--noche) 40%,#03594A);color:#fff;border-radius:20px;padding:26px 28px;position:relative;overflow:hidden}
+.dueb::after{content:"";position:absolute;right:-40px;bottom:-70px;width:200px;height:182px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 58'%3E%3Cpath d='M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z' fill='%230A463D'/%3E%3Cpath d='M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z' fill='%230A463D'/%3E%3C/svg%3E") no-repeat center/contain;opacity:.6;pointer-events:none}
+.dueb > *{position:relative;z-index:1}
+.dueb .kick{color:var(--aqua)}
+.dueb-t{max-width:560px}
+.dueb-t b{display:block;font-size:22px;font-weight:600;margin:4px 0;letter-spacing:-.3px}
+.dueb-t > span:last-child{display:block;color:#A9D6CD;font-size:14.5px}
+.dueb-op{display:flex;gap:8px;flex-wrap:wrap}
+.dueb-op button{display:inline-flex;align-items:center;gap:8px;border:0;background:var(--aqua);color:var(--noche);border-radius:999px;padding:12px 18px;font-weight:700;font-size:14.5px}
+.dueb-op button:hover{filter:brightness(1.06)}
+.dueb-op svg{width:18px;height:18px}
+.prop-op.tres{grid-template-columns:repeat(3,minmax(0,1fr))}
+.prop-op.tres button{font-size:15.5px;padding:14px 12px}
+.prop-pasos{grid-column:1/-1;list-style:none;margin:6px 0 0;padding:22px 0 0;border-top:1px solid rgba(255,255,255,.1);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:pp}
+.prop-pasos li{counter-increment:pp;position:relative;padding-left:44px}
+.prop-pasos li::before{content:counter(pp);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:10px;background:var(--aqua);color:var(--noche);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.prop-pasos b{display:block;font-size:15px;font-weight:600}
+.prop-pasos span{display:block;font-size:13.5px;color:#A9D6CD;line-height:1.45;margin-top:2px}
+.prop-c .ej{display:block;width:100%;margin-top:12px;border:0;background:none;color:var(--profundo);font-weight:600;font-size:14px;padding:4px}
+.prop-c .ej u{text-underline-offset:3px}
+
 @media (max-width:1020px){
+  .hero-g{grid-template-columns:1fr;gap:0}
+  .hero{padding-bottom:26px}
+  .hdue{margin-bottom:96px;max-width:560px}
+  .prop-pasos{grid-template-columns:repeat(2,minmax(0,1fr))}
   .porq ul{grid-template-columns:repeat(2,minmax(0,1fr))}
   .prop{grid-template-columns:1fr;padding:38px 32px;gap:28px}
   .pie-g{grid-template-columns:1fr 1fr 1fr}
@@ -580,6 +623,22 @@ img.bad{visibility:hidden}
   .gth{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:640px){
+  .tira{font-size:13px;padding:9px 12px;gap:6px;flex-wrap:nowrap}
+  .tira .tl{display:none}
+  .tira .tc{display:inline}
+  .prop-op.tres small{text-align:left}
+  .hero{padding:16px 0 22px}
+  .hdue{margin-bottom:84px;padding:20px 16px 14px;border-radius:20px}
+  .hdue h2{font-size:20px}
+  .dueb{padding:22px 18px;gap:14px}
+  .dueb-t b{font-size:19px}
+  .dueb-op{width:100%}
+  .dueb-op button{flex:1;justify-content:center;padding:12px 8px;font-size:14px}
+  .prop-op.tres{grid-template-columns:1fr}
+  .prop-op.tres button{flex-direction:row;align-items:center;gap:10px;flex-wrap:wrap}
+  .prop-op.tres button svg{margin:0}
+  .prop-op.tres small{width:100%;margin-left:36px;margin-top:-4px}
+  .prop-pasos{grid-template-columns:1fr;gap:14px}
   .btn-vp{display:none}
   .fil .mas{display:none}
   .fil.abierto .mas{display:flex}
@@ -675,6 +734,7 @@ img.bad{visibility:hidden}
   setTimeout(fin, 2150); el.addEventListener('click', fin);
 })();
 </script>
+<button class="tira" id="tira" type="button" data-prop=""><span class="tira-d" aria-hidden="true"></span><span class="tl">¿Quieres vender o arrendar tu inmueble?</span><span class="tc">¿Vendes o arriendas tu inmueble?</span> <b>Te ayudamos&nbsp;→</b></button>
 <header class="top">
   <svg class="iso" id="iso" viewBox="0 0 64 58" aria-hidden="true"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z"/><circle cx="52" cy="10" r="6"/></svg>
   <div class="wrap">
@@ -682,6 +742,7 @@ img.bad{visibility:hidden}
       <a class="marca" href="./" aria-label="Tu Lugar Ya, inicio"><svg viewBox="0 0 64 58" aria-hidden="true"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z" fill="#fff"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z" fill="#06F2D4"/><circle cx="52" cy="10" r="6" fill="#06F2D4"/></svg><b>Tu Lugar<span>Ya</span></b></a>
       <div class="bar-d"><button class="btn-o btn-fv btn-vp" type="button" data-prop="">Vende o arrienda</button><span id="fav-top"></span><span id="cta-top"></span></div>
     </div>
+    <div class="hero-g">
     <div class="hero" id="hero">
       <h1><span class="w" style="--i:0">Encuentra</span> <span class="w" style="--i:1">tu</span> <span class="w" style="--i:2">lugar,</span> <em class="w" style="--i:3">ya.</em></h1>
       <p class="w" style="--i:5">Inmuebles para arrendar y comprar en Cali y alrededores. Cuéntanos qué buscas y te mostramos solo lo que encaja contigo.</p>
@@ -689,12 +750,23 @@ img.bad{visibility:hidden}
         <button class="btn-a" type="button" data-guia><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>Ayúdame a encontrarlo</button>
         <button class="btn-g" type="button" data-vertodo>Ver todos los inmuebles</button>
       </div>
-      <button class="hprop w" style="--i:6" type="button" data-prop="">¿Tienes un inmueble? <b>Véndelo o arriéndalo con nosotros</b></button>
       <div class="stats w" style="--i:6" id="stats" hidden>
         <div><b data-st="0">0</b>disponibles</div>
         <div><b data-st="1">0</b>para arrendar</div>
         <div id="stV"><b data-st="2">0</b>para comprar</div>
       </div>
+    </div>
+    <aside class="hdue w" style="--i:7" id="hdue">
+      <span class="kick">¿Eres propietario?</span>
+      <h2>Vende o arrienda tu inmueble con nosotros</h2>
+      <p>Tomamos las fotos, lo publicamos y te traemos los clientes. Tú solo nos cuentas.</p>
+      <div class="hdue-op">
+        <button type="button" data-prop="Vender"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>Vender</button>
+        <button type="button" data-prop="Arrendar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3M16 7l3 3M14 9l2 2"/></svg>Arrendar</button>
+        <button type="button" data-prop="Vender o arrendar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>Las dos</button>
+      </div>
+      <small>Toma 2 minutos · Sin compromiso</small>
+    </aside>
     </div>
   </div>
 </header>
@@ -730,6 +802,38 @@ img.bad{visibility:hidden}
     <div class="card sk" aria-hidden="true"><div class="media"></div><i></i><i></i><i></i></div>
   </div>
 
+  <section class="prop rv2" id="propS">
+    <div class="prop-t">
+      <span class="kick">Para propietarios</span>
+      <h2>¿Quieres vender o arrendar tu inmueble? <em>Nosotros nos encargamos.</em></h2>
+      <p>Cuéntanos de tu inmueble en 2 minutos. Tomamos las fotos, lo publicamos, lo mostramos y te acompañamos hasta la firma.</p>
+      <ul class="prop-b">
+        <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></i><div><b>Nosotros tomamos las fotos y el video</b><span>Con buena luz y buen ángulo, para que se vea como es.</span></div></li>
+        <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></i><div><b>Ficha completa en el catálogo y en PDF</b><span>Con todos los datos, para que lleguen interesados de verdad.</span></div></li>
+        <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></i><div><b>Clientes que ya están buscando</b><span>Se lo mostramos a quienes nos dejaron su búsqueda.</span></div></li>
+        <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></i><div><b>Te contamos cómo va</b><span>Cada mes: vistas, interesados y visitas.</span></div></li>
+      </ul>
+    </div>
+    <div class="prop-c">
+      <h3>¿Qué quieres hacer?</h3>
+      <p>Elige una opción y te hacemos 4 preguntas rápidas.</p>
+      <div class="prop-op tres">
+        <button type="button" data-prop="Vender"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>Vender<small>Te conseguimos comprador</small></button>
+        <button type="button" data-prop="Arrendar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3M16 7l3 3M14 9l2 2"/></svg>Arrendar<small>Te conseguimos inquilino</small></button>
+        <button type="button" data-prop="Vender o arrendar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg>Las dos<small>Lo que salga primero</small></button>
+      </div>
+      <button type="button" class="lnk2" data-prop-wa><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>Prefiero escribir por WhatsApp</button>
+      <button type="button" class="ej" data-ejemplo>¿Cómo se vería tu inmueble? <u>Mira una ficha de ejemplo</u></button>
+      <small>Sin compromiso. Te respondemos por WhatsApp.</small>
+    </div>
+    <ol class="prop-pasos">
+      <li><b>Nos cuentas</b><span>En 2 minutos, aquí o por WhatsApp.</span></li>
+      <li><b>Visitamos y tomamos fotos</b><span>Conocemos el inmueble y hacemos las fotos y el video.</span></li>
+      <li><b>Publicamos y lo mostramos</b><span>Catálogo, ficha en PDF y clientes que ya buscan algo así.</span></li>
+      <li><b>Cerramos contigo</b><span>Acompañamos visitas, negociación, contrato o escritura.</span></li>
+    </ol>
+  </section>
+
   <section class="porq" id="porq">
     <div class="porq-h rv2"><span class="kick">Por qué Tu Lugar Ya</span><h2>Encontrar tu lugar no tiene que ser difícil. <em>Te lo ponemos fácil.</em></h2></div>
     <ul>
@@ -743,31 +847,6 @@ img.bad{visibility:hidden}
   <section class="avb rv2" id="avb">
     <div><h2>¿No encuentras lo que buscas?</h2><p>Cuéntanos qué necesitas y te escribimos por WhatsApp apenas llegue algo así. Sin compromiso.</p></div>
     <button class="btn-a" type="button" data-avisa>Avísame cuando llegue</button>
-  </section>
-
-  <section class="prop rv2" id="propS">
-    <div class="prop-t">
-      <span class="kick">Para propietarios</span>
-      <h2>¿Quieres vender o arrendar tu inmueble? <em>Nosotros nos encargamos.</em></h2>
-      <p>Cuéntanos de tu inmueble en 2 minutos. Tomamos las fotos, lo publicamos, lo mostramos y te acompañamos hasta la firma.</p>
-      <ul class="prop-b">
-        <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></i><div><b>Fotos y video por nuestra cuenta</b><span>Con buena luz y buen ángulo, para que se vea como es.</span></div></li>
-        <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></i><div><b>Ficha completa en el catálogo</b><span>Con todos los datos, para que lleguen interesados de verdad.</span></div></li>
-        <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></i><div><b>Clientes que ya están buscando</b><span>Se lo mostramos a quienes nos dejaron su búsqueda.</span></div></li>
-        <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></i><div><b>Te contamos cómo va</b><span>Cada mes: vistas, interesados y visitas.</span></div></li>
-      </ul>
-    </div>
-    <div class="prop-c">
-      <h3>¿Qué quieres hacer?</h3>
-      <p>Elige y te hacemos 4 preguntas rápidas.</p>
-      <div class="prop-op">
-        <button type="button" data-prop="Vender"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg>Vender<small>Te conseguimos comprador</small></button>
-        <button type="button" data-prop="Arrendar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3M16 7l3 3M14 9l2 2"/></svg>Arrendar<small>Te conseguimos inquilino</small></button>
-      </div>
-      <button type="button" class="ns" data-prop="Vender o arrendar">Aún no lo sé, quiero asesoría</button>
-      <button type="button" class="lnk2" data-prop-wa><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>Prefiero escribir por WhatsApp</button>
-      <small>Sin compromiso. Te respondemos por WhatsApp.</small>
-    </div>
   </section>
 
   <section class="proc" id="proc">
@@ -785,7 +864,7 @@ img.bad{visibility:hidden}
       <p class="pie-lema">Tu lugar, <span>ya.</span></p>
       <p>Inmobiliaria en Cali, Colombia. Apartamentos, casas, locales y oficinas para arrendar y comprar.</p></div>
     <div><h4>Busca</h4><button type="button" data-filtro-op="Arriendo">Arrendar</button><button type="button" data-filtro-op="Venta">Comprar</button><button type="button" data-guia>Ayúdame a encontrarlo</button><button type="button" data-avisa>Avísame cuando llegue</button></div>
-    <div><h4>Propietarios</h4><button type="button" data-prop="Vender">Vender mi inmueble</button><button type="button" data-prop="Arrendar">Arrendar mi inmueble</button><button type="button" data-prop="Vender o arrendar">Quiero asesoría</button></div>
+    <div><h4>Propietarios</h4><button type="button" data-prop="Vender">Vender mi inmueble</button><button type="button" data-prop="Arrendar">Arrendar mi inmueble</button><button type="button" data-prop="Vender o arrendar">Vender o arrendar</button></div>
     <div class="pie-c"><h4>Contacto</h4><div id="pie-wa"></div><span>Cali, Valle del Cauca</span></div>
   </div>
   <div class="wrap pie-b">© 2026 Tu Lugar Ya · Precios y disponibilidad sujetos a cambios. La dirección exacta se comparte al agendar la visita.</div>
@@ -1051,13 +1130,25 @@ img.bad{visibility:hidden}
       $('#limpiar').innerHTML = hay ? '<button type="button" data-limpiar>Quitar filtros</button>' : '';
     }
     var lc = sel ? [] : cerradosF();
-    $('#lista').innerHTML = (l.length ? l.map(tarjeta).join('') :
+    var tj = l.map(tarjeta);
+    if (!sel && tj.length > 6) tj.splice(6, 0, avisoDueno());
+    $('#tira').hidden = sel; $('#hdue').hidden = sel;
+    $('#lista').innerHTML = (l.length ? tj.join('') :
       sel ? '<div class="vacio"><b>Esta selección ya no está disponible</b>Te mostramos el catálogo completo o escríbenos para armarte una nueva.<div class="acc"><button class="btn-d" type="button" data-todo>Ver todo el catálogo</button></div></div>'
       : '<div class="vacio"><b>No hay inmuebles con esos filtros</b>Déjanos tu búsqueda y te avisamos apenas llegue algo así.<div class="acc"><button class="btn-d" type="button" data-avisa>Avísame cuando llegue</button>' + (hay ? '<button class="btn-l" type="button" data-limpiar>Quitar filtros</button>' : '') + '</div></div>') +
       (lc.length ? '<div class="sepc"><h3>Ya se vendieron o arrendaron</h3><p>Así se mueve nuestro catálogo. Si buscas algo parecido, ábrelo y te avisamos apenas llegue uno así.</p></div>' + lc.map(tarjeta).join('') : '');
     revelar($$('#lista .card.rv'));
   }
 
+  function avisoDueno() {
+    return '<div class="dueb"><div class="dueb-t"><span class="kick">Para propietarios</span><b>¿Tu inmueble podría estar aquí?</b><span>Lo publicamos con fotos, ficha completa y se lo mostramos a clientes que ya están buscando.</span></div>' +
+      '<div class="dueb-op"><button type="button" data-prop="Vender">Vender</button><button type="button" data-prop="Arrendar">Arrendar</button><button type="button" data-prop="Vender o arrendar">Las dos</button></div></div>';
+  }
+  /* Ficha de ejemplo para propietarios: la disponible más completa (video, fotos y datos) */
+  function ejemplo() {
+    var l = disp().slice().sort(function (a, b) { var p = function (i) { return (i.vd ? 20 : 0) + (i.f || []).length + (i.x || []).length + (i.z || []).length + (i.pi ? 2 : 0) + (i.an ? 2 : 0); }; return p(b) - p(a); });
+    return l[0] ? l[0].c : '';
+  }
   /* ---------- Selección personal (#s=TLY-0001,TLY-0002) ---------- */
   function hashSel() { return S.selc ? '#s=' + S.selc.join(',') : ''; }
   function salirSel() {
@@ -1132,6 +1223,21 @@ img.bad{visibility:hidden}
     m.innerHTML = '<iframe title="Zona aproximada de ' + esc(lugar(i)) + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=' + encodeURIComponent(q) + '&z=14&output=embed"></iframe>';
   }
   function procHTML(k) { return '<ol class="tl">' + PASOS[k].map(function (p) { return '<li><b>' + esc(p[0]) + '</b><span>' + esc(p[1]) + '</span></li>'; }).join('') + '</ol>'; }
+  /* Conteo anónimo: una visita por visitante y día (sin datos personales), clics a WhatsApp, descargas y formularios */
+  function ev(t, extra) { try { fetch(API + '?api=ev&t=' + t + (extra || ''), { mode: 'no-cors', cache: 'no-store', keepalive: true }).catch(function () {}); } catch (e) {} }
+  function origenVisita() {
+    var ua = navigator.userAgent || '', r = document.referrer || '';
+    if (/Instagram/i.test(ua) || /instagram\./i.test(r)) return 'Instagram';
+    if (/FBAN|FBAV|FB_IAB/i.test(ua) || /facebook\.|fb\.me/i.test(r)) return 'Facebook';
+    if (/WhatsApp/i.test(ua) || /whatsapp/i.test(r)) return 'WhatsApp';
+    if (/sites\.google|googleusercontent/i.test(r)) return 'Sitio web';
+    if (/google\./i.test(r)) return 'Google';
+    return 'Directo u otros';
+  }
+  function contarVisita() {
+    try { var d = new Date(), hoy = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(), antes = localStorage.getItem('tly_vd');
+      if (antes === hoy) return; localStorage.setItem('tly_vd', hoy); ev('visita', '&n=' + (antes ? 0 : 1) + '&o=' + encodeURIComponent(origenVisita())); } catch (e) {}
+  }
   function vista(c) {
     try { var k = 'tly_v_' + c, hoy = new Date().toISOString().slice(0, 10); if (localStorage.getItem(k) === hoy) return; localStorage.setItem(k, hoy); } catch (e) {}
     try { fetch(API + '?api=vista&cod=' + encodeURIComponent(c), { mode: 'no-cors', cache: 'no-store' }).catch(function () {}); } catch (e) {}
@@ -1311,6 +1417,7 @@ img.bad{visibility:hidden}
       : yo + 'Vi el catálogo de Tu Lugar Ya y quiero más información.';
   }
   function abrirWA(txt) {
+    ev('wa');
     var a = document.createElement('a');
     a.href = 'https://wa.me/' + S.d.whatsapp + '?text=' + encodeURIComponent(txt);
     a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove();
@@ -1401,7 +1508,7 @@ img.bad{visibility:hidden}
     var z = ($('#avZ').value || '').replace(/\s+/g, ' ').trim().slice(0, 80);
     var y = leerDatos(); if (!y) return;
     var b = S.avb || buscaDe(S); b.zona = z; b.nota = '';
-    registrar('', b);
+    registrar('', b); ev('av');
     $('#form').innerHTML = '<div class="lf" data-cerrar-form><div class="okf" role="status"><div class="chk">' + CHECK + '</div><h3>¡Listo, ' + esc(primer(y.nombre)) + '!</h3><p>Guardamos tu búsqueda. Te escribimos por WhatsApp apenas llegue algo así.</p><button class="btn-d" type="button" data-cerrar-form>Seguir viendo</button></div></div>';
   }
   function compartir() {
@@ -1807,7 +1914,7 @@ img.bad{visibility:hidden}
     spec = spec.filter(function (s) { return f[s[0]]; });
     Promise.all([libJS(LIB.pdf), libJS(LIB.qr).catch(function () {}), Promise.all([libB64(LIB.f4), libB64(LIB.f6)]).catch(function () { return null; }),
       Promise.all(spec.map(function (s) { return imgPDF(f[s[0]], s[1], s[2]); }))])
-      .then(function (r) { armarPDF(i, r[2], r[3]); toast('Listo. La ficha quedó en tus descargas.'); })
+      .then(function (r) { armarPDF(i, r[2], r[3]); ev('pdf'); toast('Listo. La ficha quedó en tus descargas.'); })
       .catch(function () { toast('No pudimos crear el PDF. Revisa tu conexión e intenta de nuevo.'); })
       .then(function () { PDFB = false; });
   }
@@ -1841,7 +1948,7 @@ img.bad{visibility:hidden}
     if (paso === 'op') {
       c = '<span class="kick">Paso 1 de 4</span><h2>¿Qué quieres hacer con tu inmueble?</h2><p>Son 4 preguntas rápidas. En 2 minutos lo tenemos.</p><div class="gops">' +
         opP('Vender', 'Venderlo', 'Te conseguimos comprador', ICO.casa, k++, P.op === 'Vender') + opP('Arrendar', 'Arrendarlo', 'Te conseguimos inquilino', ICO.llave, k++, P.op === 'Arrendar') +
-        opP('Vender o arrendar', 'Aún no lo sé', 'Te asesoramos sin compromiso', ICO.todo, k++, P.op === 'Vender o arrendar') + '</div>';
+        opP('Vender o arrendar', 'Venderlo o arrendarlo', 'Lo que salga primero', ICO.todo, k++, P.op === 'Vender o arrendar') + '</div>';
     } else if (paso === 'tipo') {
       c = '<span class="kick">Paso 2 de 4</span><h2>¿Qué tipo de inmueble es?</h2><p>Así sabemos qué clientes lo están buscando.</p><div class="gops">' +
         TIPOS_P.map(function (t) { return opP(t, t, '', '', k++, P.tipo === t); }).join('') + '</div>';
@@ -1869,7 +1976,7 @@ img.bad{visibility:hidden}
         '<p class="gnota">Al enviar autorizas que Tu Lugar Ya te contacte por WhatsApp sobre tu inmueble. No compartimos tus datos.</p></form>';
     } else {
       c = '<div class="gok"><div class="chk">' + CHECK + '</div><span class="kick">Recibido</span><h2>¡Gracias, ' + esc(primer(S.yo ? S.yo.nombre : '')) + '!</h2>' +
-        '<p>Ya tenemos los datos de tu inmueble. Te escribimos por WhatsApp para contarte cómo trabajamos y agendar la visita.</p><div class="gres">' + resumenP() + '</div>' +
+        '<p>Ya tenemos los datos de tu inmueble. Te escribimos por WhatsApp para contarte cómo trabajamos y agendar la visita. Si tienes fotos, puedes adelantárnoslas por ahí.</p><div class="gres">' + resumenP() + '</div>' +
         '<div class="gfin">' + (S.d && S.d.whatsapp ? '<button class="btn-w" type="button" data-pwa>' + WA + 'Escribirles ya por WhatsApp</button>' : '') + '<button class="btn-g" type="button" data-pcerrar>Volver al catálogo</button></div></div>';
     }
     var pct = Math.round(P.k / (PASOS_P.length - 1) * 100);
@@ -1900,6 +2007,7 @@ img.bad{visibility:hidden}
       if (!/^3\d{9}$/.test(c)) { $('#pE').textContent = 'Escribe un celular de 10 dígitos que empiece por 3.'; $('#pC').focus(); return; }
       S.yo = { nombre: n, cel: c };
       try { localStorage.setItem('tly_yo', JSON.stringify(S.yo)); } catch (e) {}
+      ev('prop');
       try {
         fetch(API, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify({ nombre: n, celular: c, prop: { op: P.op || 'Vender o arrendar', tipo: P.tipo, ciudad: P.ciudad === 'Otra' ? '' : P.ciudad, barrio: P.barrio, area: P.area, hab: P.hab, precio: P.precio, cuando: P.cuando, msg: P.msg } }) }).catch(function () {});
@@ -1953,6 +2061,7 @@ img.bad{visibility:hidden}
     if (t.closest('[data-favs]')) { abrirFavs(); return; }
     var pdf = t.closest('[data-pdf]'); if (pdf) { descargar(pdf.getAttribute('data-pdf')); return; }
     var prb = t.closest('[data-prop]'); if (prb) { abrirProp(prb.getAttribute('data-prop')); return; }
+    if (t.closest('[data-ejemplo]')) { var ce = ejemplo(); if (ce) irA(ce); return; }
     if (t.closest('[data-prop-wa]')) { if (!S.d || !S.d.whatsapp) { toast('Un momento, estamos cargando…'); return; } P = null; abrirWA(textoProp()); return; }
     var fop = t.closest('[data-filtro-op]'); if (fop) { if (S.selc) { S.selc = null; history.replaceState(null, '', SITIO); } S.op = fop.getAttribute('data-filtro-op'); S.pr = ''; pintarFiltros(); pintar(); $('#res').scrollIntoView({ behavior: RED ? 'auto' : 'smooth', block: 'start' }); return; }
     var exb = t.closest('[data-ex]'); if (exb) { var kx = exb.getAttribute('data-ex'); S.ex[kx] = !S.ex[kx]; pintarFiltros(); pintar(); return; }
@@ -2070,6 +2179,7 @@ img.bad{visibility:hidden}
   pintarPasos('A');
   revelar($$('.proc-h.rv2, #avb.rv2, #porq .rv2, #propS.rv2'));
   cargar();
+  contarVisita();
 })();
 </script>
 </body>
