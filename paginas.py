@@ -80,7 +80,8 @@ def resumen(i, n=170):
 
 def foto(i, w=1200, h=630):
     f = i.get('f') or []
-    return f'https://lh3.googleusercontent.com/d/{f[0]}=w{w}-h{h}-c' if f else URL + 'og.jpg'
+    # -rj: siempre JPEG (las fotos PNG pesan más de 1 MB y WhatsApp no muestra la vista previa)
+    return f'https://lh3.googleusercontent.com/d/{f[0]}=w{w}-h{h}-c-rj' if f else URL + 'og.jpg'
 
 
 def meta(s, prop, valor, attr='property'):
