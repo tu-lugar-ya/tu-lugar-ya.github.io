@@ -994,6 +994,8 @@ img.bad{visibility:hidden}
   function img(id, w) { return 'https://lh3.googleusercontent.com/d/' + encodeURIComponent(id) + '=w' + w; }
   /* Link para compartir: página propia del inmueble (muestra su foto y precio en WhatsApp) */
   function linkDe(i) { return SITIO + 'i/' + encodeURIComponent(i.c) + '/'; }
+  /* Código del inmueble si la dirección es /i/CODIGO/ (link propio con foto para WhatsApp) */
+  function codRuta() { var m = location.pathname.match(/\/i\/([A-Za-z]+-\d+)\/?$/); return m ? m[1].toUpperCase() : ''; }
   function primer(n) { return String(n || '').trim().split(/\s+/)[0]; }
   function precioCorto(i) { return esA(i) && i.pc && S.op !== 'Venta' ? cop(i.pc) + '/mes' : esV(i) && i.pv ? cop(i.pv) : esA(i) && i.pc ? cop(i.pc) + '/mes' : 'Consultar'; }
   function bloquear() { document.documentElement.classList.toggle('lock', !!($('#pol').innerHTML || $('#ficha').innerHTML || $('#guia').innerHTML || $('#prop').innerHTML || $('#cajon').innerHTML || $('#comp').innerHTML)); }
@@ -1156,7 +1158,7 @@ img.bad{visibility:hidden}
       (i.vd ? '<span class="pill vd">' + PLAY + 'Video</span>' : '') + corazon(i.c) +
       (n > 1 ? '<button class="arr l" type="button" data-paso="-1" aria-label="Foto anterior">' + IZQ + '</button><button class="arr r" type="button" data-paso="1" aria-label="Foto siguiente">' + DER + '</button><div class="dots">' + Array(n + 1).join('<i></i>').replace('<i>', '<i class="on">') + '</div>' : '') +
       '</div><div class="body">' + bloquePrecio(i) +
-      '<h3><a href="#' + esc(i.c) + '">' + esc(titulo(i)) + '</a></h3><div class="loc">' + esc(i.ci || '') + '</div>' + specs(i) + '</div></article>';
+      '<h3><a href="' + esc(linkDe(i)) + '">' + esc(titulo(i)) + '</a></h3><div class="loc">' + esc(i.ci || '') + '</div>' + specs(i) + '</div></article>';
   }
   function pintar() {
     var sel = !!S.selc, l, hay = [S.ci, S.ti, S.pr, S.ha].some(Boolean) || exOn().length > 0;
@@ -1330,15 +1332,16 @@ img.bad{visibility:hidden}
       '</div></div>';
     bloquear(); calcSim(); vista(i.c);
     document.title = tipoNeg + ' en ' + lugar(i) + ' | Tu Lugar Ya';
+    try { if (location.href !== linkDe(i)) history.replaceState(history.state, '', linkDe(i)); } catch (e) {}
     var b = $('#ficha .cerrar'); if (b) b.focus({ preventScroll: true, focusVisible: false });
   }
   function cerrarFicha(soloLimpiar) {
-    if (!$('#ficha').innerHTML) { if (soloLimpiar && location.hash && !/^#s=/.test(location.hash)) history.replaceState(null, '', SITIO + hashSel()); return; }
+    if (!$('#ficha').innerHTML) { if (soloLimpiar && ((location.hash && !/^#s=/.test(location.hash)) || codRuta())) history.replaceState(null, '', SITIO + hashSel()); return; }
     $('#ficha').innerHTML = ''; $('#visor').innerHTML = '';
     bloquear();
     document.title = 'Tu Lugar Ya | Inmuebles en Cali';
     var c = S.sel && S.sel.c; S.sel = null;
-    if (location.hash && !/^#s=/.test(location.hash)) history.replaceState(null, '', SITIO + hashSel());
+    if ((location.hash && !/^#s=/.test(location.hash)) || codRuta()) history.replaceState(null, '', SITIO + hashSel());
     var t = c && $('.card[data-c="' + c + '"] h3 a'); if (t) t.focus({ preventScroll: true });
   }
   function pedirCerrar() {
@@ -1347,7 +1350,7 @@ img.bad{visibility:hidden}
   function ruta() {
     if (location.hash === '#datos') { if (!$('#pol').innerHTML) abrirPolitica(); return; }
     if (!S.d) return;
-    var h = decodeURIComponent(location.hash.slice(1));
+    var h = decodeURIComponent(location.hash.slice(1)) || codRuta();
     if (h === 'vender') { if (!P) abrirProp(''); return; }
     if (/^s=/.test(h)) {
       var l = h.slice(2).split(',').map(function (x) { return x.trim().toUpperCase(); }).filter(function (x) { return /^[A-Z]+-\d+$/.test(x); }).slice(0, 12);
@@ -1362,6 +1365,7 @@ img.bad{visibility:hidden}
     if (!h && S.selc) { S.selc = null; pintar(); }
   }
   window.addEventListener('hashchange', ruta);
+  window.addEventListener('popstate', ruta);
   function irA(c) {
     $('#cajon').innerHTML = ''; $('#comp').innerHTML = '';
     S.propio = true;
@@ -2341,7 +2345,7 @@ img.bad{visibility:hidden}
   function cargar() {
     var tLocal = 0, vivo = false;
     try { var c = JSON.parse(localStorage.getItem(CACHE) || 'null'); if (c && c.d && Date.now() - c.t < 864e5) { tLocal = c.t; usar(c.d); } } catch (e) {}
-    var copia = fetch('catalogo.json', { cache: 'no-cache' })
+    var copia = fetch(SITIO + 'catalogo.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (vivo || !d || !Array.isArray(d.inmuebles) || !d.inmuebles.length) return;
