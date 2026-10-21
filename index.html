@@ -1827,15 +1827,17 @@ img.bad{visibility:hidden}
     if (RED || String(b.dataset.n) === String(n)) { b.textContent = n; b.dataset.n = n; return; }
     b.dataset.n = n;
     var t0 = 0, d = 1200;
-    var f = function (t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - p, 3); b.textContent = Math.round(n * e); if (p < 1) requestAnimationFrame(f); };
+    var f = function (t) { if (String(b.dataset.n) !== String(n)) return; if (!t0) t0 = t; var p = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - p, 3); b.textContent = Math.round(n * e); if (p < 1) requestAnimationFrame(f); };
     requestAnimationFrame(f);
   }
+  var statW = 0;
   function stats() {
     var L = disp(), v = [L.length, L.filter(esA).length, L.filter(esV).length];
     if (!v[0]) return;
+    clearInterval(statW);
     var go = function () { $('#stats').hidden = false; $('#stV').hidden = !v[2]; $$('#stats b').forEach(function (b) { animarNum(b, v[Number(b.getAttribute('data-st'))]); }); };
     var r = document.documentElement;
-    if (r.classList.contains('anim') && !r.classList.contains('listo')) { var w = setInterval(function () { if (r.classList.contains('listo')) { clearInterval(w); go(); } }, 120); }
+    if (r.classList.contains('anim') && !r.classList.contains('listo')) { statW = setInterval(function () { if (r.classList.contains('listo')) { clearInterval(statW); go(); } }, 120); }
     else go();
   }
   var isoEl = $('#iso'), rafS = 0;
