@@ -612,6 +612,30 @@ img.bad{visibility:hidden}
 .prop-c .ej{display:block;width:100%;margin-top:12px;border:0;background:none;color:var(--profundo);font-weight:600;font-size:14px;padding:4px}
 .prop-c .ej u{text-underline-offset:3px}
 
+/* Colecciones, más resultados y búsqueda por barrio */
+.colec{margin:30px 0 0}
+.colec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 14px}
+.colec-h h2{margin:0;font-size:22px;font-weight:600;color:var(--profundo);letter-spacing:-.3px}
+.colec-h span{color:var(--suave);font-size:14px}
+.colec-l{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.colec-l button{position:relative;border:0;padding:0;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:var(--noche);color:#fff;text-align:left;cursor:pointer}
+.colec-l img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.colec-l button:hover img{transform:scale(1.05)}
+.colec-l button::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,53,46,0) 35%,rgba(1,53,46,.88))}
+.colec-l b{position:absolute;left:14px;right:12px;bottom:30px;z-index:1;font-size:16px;font-weight:600;line-height:1.2}
+.colec-l small{position:absolute;left:14px;bottom:12px;z-index:1;font-size:12.5px;color:var(--aqua);font-weight:600}
+.mas-l{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:-10px}
+.mas-l small{color:var(--suave);font-size:13px}
+.chipz{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--menta);background:var(--tinte);color:var(--noche);border-radius:999px;padding:6px 12px;font-weight:600;font-size:13px;margin-right:8px}
+.zonas{margin:10px 0 50px}
+.zonas h2{margin:0 0 6px;font-size:22px;font-weight:600;color:var(--profundo);letter-spacing:-.3px}
+.zonas p{margin:0 0 14px;color:var(--suave);font-size:15px}
+.zonas-l{display:flex;flex-wrap:wrap;gap:8px}
+.zonas-l a{border:1px solid var(--linea);background:var(--hoja);border-radius:999px;padding:7px 14px;font-size:13.5px;text-decoration:none;color:var(--texto)}
+.zonas-l a:hover{border-color:var(--menta);color:var(--noche)}
+.zonas-l a span{color:var(--suave)}
+@media (max-width:1020px){.colec-l{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.colec-l{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 18px;margin:0 -18px;padding:0 18px 4px;scrollbar-width:none}.colec-l::-webkit-scrollbar{display:none}.colec-l button{flex:0 0 42%;scroll-snap-align:start}.colec-h h2{font-size:19px}.colec-h span{display:none}}
 @media (max-width:1020px){
   .hero-g{grid-template-columns:1fr;gap:0}
   .hero{padding-bottom:26px}
@@ -760,7 +784,7 @@ img.bad{visibility:hidden}
   if (red) return;
   r.classList.add('anim');
   var ver = false;
-  try { ver = !sessionStorage.getItem('tly_intro') && !location.hash; if (ver) sessionStorage.setItem('tly_intro', '1'); } catch (e) {}
+  try { ver = !sessionStorage.getItem('tly_intro') && !location.hash && !window.TLY_ZONA; if (ver) sessionStorage.setItem('tly_intro', '1'); } catch (e) {}
   if (!ver) { r.classList.add('listo'); return; }
   var el = document.getElementById('intro'); el.hidden = false; r.classList.add('lock');
   var fin = function () {
@@ -828,6 +852,7 @@ img.bad{visibility:hidden}
     <label class="sel"><span class="sr">Habitaciones</span><select id="fHa"></select></label>
     <div class="mas" id="fMas" role="group" aria-label="Más filtros" hidden></div>
   </div>
+  <section class="colec" id="colec" hidden></section>
   <div class="res" id="res">
     <div class="res-t"><h2 id="cnt" aria-live="polite">Cargando inmuebles…</h2><small class="act" id="act"></small></div>
     <div class="res-d"><span id="limpiar"></span><label class="ord sel" id="ordL"><span>Ordenar</span><select id="fOr"><option value="">Recomendados</option><option value="pa">Menor precio</option><option value="pd">Mayor precio</option><option value="ar">Más grandes</option><option value="nv">Más recientes</option></select></label></div>
@@ -885,6 +910,8 @@ img.bad{visibility:hidden}
     </ul>
   </section>
 
+  <section class="zonas" id="zonas" hidden></section>
+
   <section class="avb rv2" id="avb">
     <div><h2>¿No encuentras lo que buscas?</h2><p>Cuéntanos qué necesitas y te escribimos por WhatsApp apenas llegue algo así. Sin compromiso.</p></div>
     <button class="btn-a" type="button" data-avisa>Avísame cuando llegue</button>
@@ -927,11 +954,15 @@ img.bad{visibility:hidden}
 (function () {
   'use strict';
   var API = 'https://script.google.com/macros/s/AKfycbzaBTfIC_Cvgz4ldBfY1Sc8QfHVQaH4N2GrzVk5AY3cg5VcNkHsWlxPJ1bOxKtxZZ1-/exec';
-  var SITIO = location.origin + location.pathname.replace(/\/i\/[^\/]+\/?$/, '/');
+  var SITIO = location.origin + location.pathname.replace(/\/(?:i\/[^\/]+|(?:arriendo|venta)(?:\/[^\/]+)?)\/?$/, '/');
+  /* De dónde viene la visita cuando el link lo dice (?o=wa, ?o=ig…); luego se limpia la dirección */
+  var ORIGQ = (location.search.match(/[?&]o=([a-z]+)/) || [])[1] || '';
+  if (ORIGQ) { try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {} }
+  var ZONA = window.TLY_ZONA || null;
   var WA_RESPALDO = '573202107143', PENDK = 'tly_pend', PDK = 'tly_pdraft';
   var CACHE = 'tly_cat_v1', FAVK = 'tly_fav';
   var RED = false; try { RED = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-  var S = { d: null, op: '', ci: '', ti: '', pr: '', ha: '', ex: {}, ord: '', yo: null, sel: null, propio: false, pend: null, fav: [], selc: null, avb: null, vivo: false, espera: '' };
+  var S = { d: null, op: '', ci: '', ti: '', pr: '', ha: '', ex: {}, zb: '', zbN: '', lim: 0, limK: '', ord: '', yo: null, sel: null, propio: false, pend: null, fav: [], selc: null, avb: null, vivo: false, espera: '' };
   var G = null;
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -986,9 +1017,11 @@ img.bad{visibility:hidden}
   function buscar(c) { return (S.d && S.d.inmuebles || []).filter(function (x) { return x.c === c; })[0] || null; }
   function negocio(i) { return esV(i) && esA(i) ? 'Venta y arriendo' : esV(i) ? 'Venta' : 'Arriendo'; }
   function cerrado(i) { return i.e === 'Vendido' || i.e === 'Arrendado'; }
-  function nuevo(i) { if (!i.fc || cerrado(i)) return false; var t = Date.parse(i.fc + 'T12:00:00'); return t > 0 && Date.now() - t < 7 * 864e5; }
+  function nuevo(i) { if (!i.fc || cerrado(i)) return false; var t = Date.parse(i.fc + 'T12:00:00'); return t > 0 && Date.now() - t < 3 * 864e5; }
+  /* Barrio en minúsculas, sin tildes ni espacios (igual que las páginas /arriendo/santa-monica/) */
+  function slug(x) { return String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
   function selloHTML(i) { return '<span class="sello">' + esc(i.e) + (i.ny ? '<small>por Tu Lugar Ya</small>' : '') + '</span>'; }
-  function disp() { return (S.d && S.d.inmuebles || []).filter(function (i) { return !cerrado(i); }); }
+  function disp() { return (S.d && S.d.inmuebles || []).filter(function (i) { return !cerrado(i) && !i.oc; }); }
   function titulo(i) { return i.t + (i.b ? ' en ' + i.b : ''); }
   function lugar(i) { return [i.b, i.ci].filter(Boolean).join(', '); }
   function img(id, w) { return 'https://lh3.googleusercontent.com/d/' + encodeURIComponent(id) + '=w' + w; }
@@ -1113,6 +1146,7 @@ img.bad{visibility:hidden}
   function coincide(i, f) {
     if (f.op && !(f.op === 'Venta' ? esV(i) : esA(i))) return false;
     if (f.ci && i.ci !== f.ci) return false;
+    if (f.zb && slug(i.b) !== f.zb) return false;
     if (f.ti && i.t !== f.ti) return false;
     if (f.pr) { var m = String(f.pr).match(/^([AV]):(\d+)$/); if (m) { var lim = Number(m[2]); if (m[1] === 'A' ? !(esA(i) && i.pc && i.pc <= lim) : !(esV(i) && i.pv && i.pv <= lim)) return false; } }
     if (f.ha && (i.h || 0) < Number(f.ha)) return false;
@@ -1134,7 +1168,7 @@ img.bad{visibility:hidden}
     });
   }
   function filtrar() { return ordenar(disp().filter(function (i) { return coincide(i, S); })); }
-  function cerradosF() { return (S.d.inmuebles || []).filter(function (i) { return cerrado(i) && coincide(i, S); }); }
+  function cerradosF() { return (S.d.inmuebles || []).filter(function (i) { return cerrado(i) && i.ny && coincide(i, S); }).slice(0, 6); }
 
   /* ---------- Aparición suave al hacer scroll ---------- */
   var io = !RED && 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
@@ -1161,7 +1195,7 @@ img.bad{visibility:hidden}
       '<h3><a href="' + esc(linkDe(i)) + '">' + esc(titulo(i)) + '</a></h3><div class="loc">' + esc(i.ci || '') + '</div>' + specs(i) + '</div></article>';
   }
   function pintar() {
-    var sel = !!S.selc, l, hay = [S.ci, S.ti, S.pr, S.ha].some(Boolean) || exOn().length > 0;
+    var sel = !!S.selc, l, hay = [S.ci, S.ti, S.pr, S.ha, S.zb].some(Boolean) || exOn().length > 0, total = 0;
     $('#fil').hidden = sel; $('#selb').hidden = !sel; $('#ordL').hidden = sel; $('#avb').hidden = sel;
     $('#hero').classList.toggle('modo-sel', sel);
     if (sel) {
@@ -1171,19 +1205,71 @@ img.bad{visibility:hidden}
       $('#cnt').textContent = l.length === 1 ? '1 opción para ti' : l.length + ' opciones para ti';
       $('#limpiar').innerHTML = '';
     } else {
-      l = filtrar();
-      $('#cnt').textContent = l.length === 1 ? '1 inmueble disponible' : l.length + ' inmuebles disponibles';
-      $('#limpiar').innerHTML = hay ? '<button type="button" data-limpiar>Quitar filtros</button>' : '';
+      l = filtrar(); total = l.length;
+      var dz = S.zb ? (S.op === 'Venta' ? ' en venta' : S.op === 'Arriendo' ? ' en arriendo' : '') + ' en ' + S.zbN : '';
+      $('#cnt').textContent = (l.length === 1 ? '1 inmueble disponible' : l.length + ' inmuebles disponibles') + dz;
+      $('#limpiar').innerHTML = (S.zb ? '<span class="chipz">' + esc(S.zbN) + '</span>' : '') + (hay ? '<button type="button" data-limpiar>Quitar filtros</button>' : '');
+      /* Vitrina: los 12 mejores al entrar; con filtros, de 24 en 24 */
+      var clave = [S.op, S.ci, S.ti, S.pr, S.ha, S.zb, S.ord, exOn().join()].join('|');
+      if (clave !== S.limK) { S.limK = clave; S.lim = 0; }
+      var tope = S.tope = S.lim || (hay || S.op || S.ord ? 24 : 12);
+      if (l.length > tope) l = l.slice(0, tope);
     }
     var lc = sel ? [] : cerradosF();
     var tj = l.map(tarjeta);
     if (!sel && tj.length > 6) tj.splice(6, 0, avisoDueno());
+    if (!sel && total > l.length) tj.push('<div class="mas-l"><button class="btn-d" type="button" data-masl>' + (S.tope === 12 ? 'Ver todos los inmuebles (' + total + ')' : 'Ver más (' + (total - l.length) + ')') + '</button><small>Mostrando ' + l.length + ' de ' + total + '</small></div>');
+    pintarColec(sel || hay || !!S.op);
+    if ($('#zonas').innerHTML) $('#zonas').hidden = sel;
     $('#tira').hidden = sel; $('#hdue').hidden = sel;
     $('#lista').innerHTML = (l.length ? tj.join('') :
       sel ? '<div class="vacio"><b>Esta selección ya no está disponible</b>Te mostramos el catálogo completo o escríbenos para armarte una nueva.<div class="acc"><button class="btn-d" type="button" data-todo>Ver todo el catálogo</button></div></div>'
       : '<div class="vacio"><b>No hay inmuebles con esos filtros</b>Déjanos tu búsqueda y te avisamos apenas llegue algo así.<div class="acc"><button class="btn-d" type="button" data-avisa>Avísame cuando llegue</button>' + (hay ? '<button class="btn-l" type="button" data-limpiar>Quitar filtros</button>' : '') + '</div></div>') +
       (lc.length ? '<div class="sepc"><h3>Ya se vendieron o arrendaron</h3><p>Ya no están disponibles. Si buscas algo parecido, ábrelo y te avisamos apenas llegue uno así.</p></div>' + lc.map(tarjeta).join('') : '');
     revelar($$('#lista .card.rv'));
+  }
+  /* ---------- Colecciones: entrar por lo que la gente busca ---------- */
+  var COLEC = [
+    ['est', 'Para estrenar', { ex: { est: true } }],
+    ['pis', 'Con piscina', { ex: { pis: true } }],
+    ['a3', 'Arriendos hasta $3 M', { op: 'Arriendo', pr: 'A:3000000' }],
+    ['fam', '3 habitaciones o más', { ha: '3' }],
+    ['amo', 'Amoblados', { ex: { amo: true } }],
+    ['mas', 'Admiten mascotas', { ex: { mas: true } }]
+  ];
+  function pintarColec(no) {
+    var box = $('#colec'); if (!box) return;
+    if (no || !S.d) { box.hidden = true; return; }
+    var usadas = {}, items = COLEC.map(function (c) {
+      var l = disp().filter(function (i) { return coincide(i, c[2]); });
+      var p = l.filter(function (i) { return (i.f || []).length && !usadas[i.c]; })[0] || l[0];
+      if (p) usadas[p.c] = 1;
+      return { c: c, n: l.length, f: p && (p.f || [])[0] };
+    }).filter(function (x) { return x.n >= 2; });
+    if (items.length < 3) { box.hidden = true; return; }
+    box.innerHTML = '<div class="colec-h"><h2>Explora por lo que buscas</h2><span>Toca una y te mostramos solo esos</span></div><div class="colec-l">' +
+      items.map(function (x) { return '<button type="button" data-colec="' + x.c[0] + '">' + (x.f ? '<img src="' + esc(img(x.f, 480)) + '" alt="" loading="lazy" decoding="async">' : '') + '<b>' + esc(x.c[1]) + '</b><small>' + x.n + ' inmuebles</small></button>'; }).join('') + '</div>';
+    box.hidden = false;
+  }
+  function usarColec(k) {
+    var c = COLEC.filter(function (x) { return x[0] === k; })[0]; if (!c) return;
+    var f = c[2]; S.op = f.op || ''; S.pr = f.pr || ''; S.ha = f.ha || ''; S.ci = S.ti = ''; S.ex = {};
+    Object.keys(f.ex || {}).forEach(function (x) { S.ex[x] = true; });
+    pintarFiltros(); pintar(); $('#res').scrollIntoView({ behavior: RED ? 'auto' : 'smooth', block: 'start' });
+  }
+  /* ---------- Busca por barrio: enlaces a /arriendo/barrio/ y /venta/barrio/ ---------- */
+  function pintarZonas() {
+    var box = $('#zonas'); if (!box || !S.d) return;
+    var g = {};
+    disp().forEach(function (i) {
+      if (!i.b) return;
+      [['arriendo', esA(i)], ['venta', esV(i)]].forEach(function (o) { if (!o[1]) return; var k = o[0] + '/' + slug(i.b); g[k] = g[k] || { k: k, op: o[0], b: i.b, n: 0 }; g[k].n++; });
+    });
+    var l = Object.keys(g).map(function (k) { return g[k]; }).filter(function (x) { return x.n >= 2; }).sort(function (a, b) { return a.op.localeCompare(b.op) || b.n - a.n || a.b.localeCompare(b.b, 'es'); });
+    if (!l.length) { box.hidden = true; return; }
+    box.innerHTML = '<h2>Busca por barrio</h2><p>Inmuebles disponibles en cada zona de Cali.</p><div class="zonas-l">' +
+      l.map(function (x) { return '<a href="' + SITIO + x.k + '/">' + (x.op === 'arriendo' ? 'Arriendo' : 'Venta') + ' en ' + esc(x.b) + ' <span>' + x.n + '</span></a>'; }).join('') + '</div>';
+    box.hidden = false;
   }
 
   function avisoDueno() {
@@ -1272,6 +1358,7 @@ img.bad{visibility:hidden}
   /* Conteo anónimo: una visita por visitante y día (sin datos personales), clics a WhatsApp, descargas y formularios */
   function ev(t, extra) { try { fetch(API + '?api=ev&t=' + t + (extra || ''), { mode: 'no-cors', cache: 'no-store', keepalive: true }).catch(function () {}); } catch (e) {} }
   function origenVisita() {
+    var oq = { wa: 'WhatsApp', ig: 'Instagram', fb: 'Facebook', g: 'Google', web: 'Sitio web' }[ORIGQ]; if (oq) return oq;
     var ua = navigator.userAgent || '', r = document.referrer || '';
     if (/Instagram/i.test(ua) || /instagram\./i.test(r)) return 'Instagram';
     if (/FBAN|FBAV|FB_IAB/i.test(ua) || /facebook\.|fb\.me/i.test(r)) return 'Facebook';
@@ -2262,7 +2349,9 @@ img.bad{visibility:hidden}
     if (t.closest('[data-guia]')) { abrirGuia(); return; }
     if (t.closest('[data-avisa]')) { avisame(); return; }
     if (t.closest('[data-todo]')) { salirSel(); return; }
-    if (t.closest('[data-vertodo]')) { $('#res').scrollIntoView({ behavior: RED ? 'auto' : 'smooth', block: 'start' }); return; }
+    if (t.closest('[data-vertodo]')) { if (!S.lim) { S.lim = 999; pintar(); } $('#res').scrollIntoView({ behavior: RED ? 'auto' : 'smooth', block: 'start' }); return; }
+    if (t.closest('[data-masl]')) { S.lim = S.tope === 12 ? 999 : S.tope + 24; pintar(); return; }
+    var col = t.closest('[data-colec]'); if (col) { usarColec(col.getAttribute('data-colec')); return; }
     var pt = t.closest('#pTab button'); if (pt) { pintarPasos(pt.getAttribute('data-p')); return; }
     var avc = t.closest('[data-avisa-c]'); if (avc) { avisarParecido(avc.getAttribute('data-avisa-c')); return; }
     var vpar = t.closest('[data-parecidos]'); if (vpar) { verParecidos(vpar.getAttribute('data-parecidos')); return; }
@@ -2270,7 +2359,7 @@ img.bad{visibility:hidden}
     if (t.closest('[data-compartir]')) { compartir(); return; }
     if (t.closest('[data-video]')) { abrirVideo(); return; }
     if (t.closest('[data-mapa]')) { cargarMapa(); return; }
-    if (t.closest('[data-limpiar]')) { S.ci = S.ti = S.pr = S.ha = ''; S.ex = {}; pintarFiltros(); pintar(); return; }
+    if (t.closest('[data-limpiar]')) { S.ci = S.ti = S.pr = S.ha = ''; S.ex = {}; if (S.zb) { S.zb = S.zbN = ''; try { history.replaceState(null, '', SITIO); } catch (e) {} } pintarFiltros(); pintar(); return; }
     if (t.closest('#ftog')) { var fl = $('#fil'); fl.classList.toggle('abierto'); $('#ftog').setAttribute('aria-expanded', fl.classList.contains('abierto')); return; }
     var op = t.closest('#fOp button');
     if (op) { S.op = op.getAttribute('data-v'); S.pr = ''; pintarFiltros(); pintar(); return; }
@@ -2330,7 +2419,7 @@ img.bad{visibility:hidden}
     var cods = d.inmuebles.map(function (i) { return i.c; }), nf = S.fav.filter(function (c) { return cods.indexOf(c) > -1; });
     if (nf.length !== S.fav.length) { S.fav = nf; guardarFav(); }
     stats();
-    pintarFiltros(); pintar();
+    pintarFiltros(); pintar(); pintarZonas();
     if (S.sel) { var i = buscar(S.sel.c); if (!i) cerrarFicha(); }
     else ruta();
   }
@@ -2378,6 +2467,7 @@ img.bad{visibility:hidden}
   if (location.hash === '#datos') abrirPolitica();
   pintarPasos('A');
   revelar($$('.proc-h.rv2, #avb.rv2, #porq .rv2, #propS.rv2'));
+  if (ZONA) { S.op = ZONA.op || ''; S.zb = ZONA.zb || ''; S.zbN = ZONA.b || ''; var bajar = function () { if (S.d) $('#res').scrollIntoView({ block: 'start' }); else setTimeout(bajar, 150); }; setTimeout(bajar, 300); }
   cargar();
   contarVisita();
   setTimeout(reintentarPend, 4000);

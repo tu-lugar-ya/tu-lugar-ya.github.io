@@ -4,13 +4,22 @@ Crea sitio/i/<CÓDIGO>/index.html: la misma página del catálogo, pero con tít
 y foto del inmueble en las etiquetas que leen WhatsApp, Facebook y Google; al abrirla muestra
 la ficha de ese inmueble. También crea sitemap.xml, robots.txt y 404.html (los links de un
 inmueble recién publicado abren su ficha aunque la página todavía no exista).
+Páginas por barrio: sitio/arriendo/<barrio>/ y sitio/venta/<barrio>/ (con 2 o más inmuebles), más
+sitio/arriendo/ y sitio/venta/ para toda la ciudad. Los inmuebles que no cumplen el mínimo (campo "oc")
+tienen su página por link, pero no salen en las listas ni en el sitemap.
 Uso: python3 paginas.py [carpeta_del_sitio]
 """
-import html, json, os, re, sys
+import html, json, os, re, sys, unicodedata
 
 SITIO = sys.argv[1] if len(sys.argv) > 1 else 'sitio'
 URL = 'https://tu-lugar-ya.github.io/'
 COD = re.compile(r'^[A-Z]+-\d+$')
+
+
+def slug(x):
+    x = unicodedata.normalize('NFD', str(x or ''))
+    x = ''.join(c for c in x if unicodedata.category(c) != 'Mn').lower()
+    return re.sub(r'[^a-z0-9]+', '-', x).strip('-')
 
 
 def cop(n):
@@ -99,7 +108,7 @@ def pagina(plantilla, i):
     T, D = html.escape(t + ' | Tu Lugar Ya'), html.escape(desc)
     s = plantilla
     # Primero en <head>: rutas relativas desde la raíz y abrir la ficha de este inmueble
-    s = s.replace('<head>', '<head>\n<base href="/">\n<script>if(!location.hash)history.replaceState(null,"","/#' + c + '")</script>', 1)
+    s = s.replace('<head>', '<head>\n<base href="/">\n<script>if(!location.hash)history.replaceState(null,"","/"+location.search+"#' + c + '")</script>', 1)
     s = re.sub(r'<title>[^<]*</title>', '<title>' + T + '</title>', s, count=1)
     s = meta(s, 'description', D, 'name')
     s = meta(s, 'og:title', html.escape(t))
@@ -119,6 +128,44 @@ def pagina(plantilla, i):
     return s
 
 
+PLURAL = {'Apartamento': 'Apartamentos', 'Apartaestudio': 'Apartaestudios', 'Casa': 'Casas', 'Local': 'Locales', 'Oficina': 'Oficinas',
+          'Lote': 'Lotes', 'Bodega': 'Bodegas', 'Consultorio': 'Consultorios', 'Finca': 'Fincas', 'Edificio': 'Edificios'}
+
+
+def zona(plantilla, op, l, barrio=None):
+    """Página de inmuebles en arriendo o venta (de un barrio o de toda la ciudad)."""
+    neg = 'arriendo' if op == 'Arriendo' else 'venta'
+    tipos = {i.get('t') for i in l}
+    que = PLURAL.get(next(iter(tipos)), 'Inmuebles') if len(tipos) == 1 else 'Apartamentos, casas y más' if barrio else 'Inmuebles'
+    ciudades = sorted({i.get('ci') for i in l if i.get('ci')})
+    lugar = (barrio + (', ' + ciudades[0] if len(ciudades) == 1 else '')) if barrio else 'Cali y alrededores'
+    url = f'{URL}{neg}/' + (slug(barrio) + '/' if barrio else '')
+    precios = [i.get('pc') if op == 'Arriendo' else i.get('pv') for i in l]
+    precios = [p for p in precios if p]
+    desde = ('desde ' + cop(min(precios)) + (' al mes' if op == 'Arriendo' else '')) if precios else ''
+    t = f'{que} en {neg} en {lugar}'
+    D = f'{len(l)} ' + ('inmuebles' if len(l) != 1 else 'inmueble') + f' en {neg} en {lugar}' + (f', {desde}' if desde else '') + '. Fotos reales, precio y visita por WhatsApp con Tu Lugar Ya.'
+    T, De = html.escape(t + ' | Tu Lugar Ya'), html.escape(D)
+    s = plantilla
+    z = {'op': op, 'zb': slug(barrio) if barrio else '', 'b': barrio or ''}
+    s = s.replace('<head>', '<head>\n<base href="/">\n<script>window.TLY_ZONA=' + json.dumps(z, ensure_ascii=False) + '</script>', 1)
+    s = re.sub(r'<title>[^<]*</title>', '<title>' + T + '</title>', s, count=1)
+    s = meta(s, 'description', De, 'name')
+    s = meta(s, 'og:title', html.escape(t))
+    s = meta(s, 'og:description', De)
+    s = meta(s, 'og:url', url)
+    con_foto = [i for i in l if i.get('f')]
+    if con_foto:
+        s = meta(s, 'og:image', html.escape(foto(con_foto[0])))
+    s = re.sub(r'<link rel="canonical" href="[^"]*">', '<link rel="canonical" href="' + url + '">', s, count=1)
+    ld = {'@context': 'https://schema.org', '@type': 'ItemList', 'name': t, 'url': url,
+          'itemListElement': [{'@type': 'ListItem', 'position': k + 1, 'url': f"{URL}i/{i['c']}/", 'name': titulo(i)} for k, i in enumerate(l[:30])]}
+    s = s.replace('</head>', '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace('</', '<\\/') + '</script>\n</head>', 1)
+    lis = ''.join(f'<li><a href="/i/{i["c"]}/">{html.escape(titulo(i))}</a> · {html.escape(precio(i))}</li>' for i in l)
+    s = s.replace('<body>', '<body>\n<noscript><h1>' + html.escape(t) + '</h1><p>' + De + '</p><ul>' + lis + '</ul></noscript>', 1)
+    return s, url
+
+
 def main():
     plantilla = open(os.path.join(SITIO, 'index.html'), encoding='utf8').read()
     d = json.load(open(os.path.join(SITIO, 'catalogo.json'), encoding='utf8'))
@@ -128,7 +175,27 @@ def main():
         carpeta = os.path.join(SITIO, 'i', i['c'])
         os.makedirs(carpeta, exist_ok=True)
         open(os.path.join(carpeta, 'index.html'), 'w', encoding='utf8').write(pagina(plantilla, i))
-        urls.append(f"{URL}i/{i['c']}/")
+        if not i.get('oc'):
+            urls.append(f"{URL}i/{i['c']}/")
+    # Páginas por barrio y por ciudad (solo inmuebles disponibles que cumplen el mínimo)
+    vis = [i for i in lista if i.get('e') not in ('Vendido', 'Arrendado') and not i.get('oc')]
+    nz = 0
+    for op, es in (('Arriendo', esA), ('Venta', esV)):
+        l = [i for i in vis if es(i)]
+        if not l:
+            continue
+        grupos = {}
+        for i in l:
+            if i.get('b'):
+                grupos.setdefault(slug(i['b']), []).append(i)
+        paginas = [(None, l)] + [(g[0]['b'], g) for g in grupos.values() if len(g) >= 2]
+        for barrio, g in paginas:
+            s, url = zona(plantilla, op, g, barrio)
+            carpeta = os.path.join(SITIO, url[len(URL):].strip('/'))
+            os.makedirs(carpeta, exist_ok=True)
+            open(os.path.join(carpeta, 'index.html'), 'w', encoding='utf8').write(s)
+            urls.append(url)
+            nz += 1
     hoy = (d.get('_t') or d.get('actualizado') or '')[:10]
     open(os.path.join(SITIO, 'sitemap.xml'), 'w', encoding='utf8').write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
@@ -140,7 +207,7 @@ def main():
         'location.replace("/"+(m?"#"+m[1].toUpperCase():""));</script></head>'
         '<body style="font-family:sans-serif;background:#01352E;color:#fff;padding:40px">'
         '<a href="/" style="color:#06F2D4">Ir al catálogo de Tu Lugar Ya</a></body></html>\n')
-    print(len(lista), 'páginas de inmueble')
+    print(len(lista), 'páginas de inmueble ·', nz, 'páginas por barrio o ciudad')
 
 
 if __name__ == '__main__':
