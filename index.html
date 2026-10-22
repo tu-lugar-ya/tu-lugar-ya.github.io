@@ -1120,7 +1120,6 @@ img.bad{visibility:hidden}
     ['asc', 'Con ascensor', function (i) { return i.asc === 'Sí' || (i.x || []).indexOf('Ascensor') > -1; }],
     ['pis', 'Con piscina', function (i) { return (i.z || []).some(function (x) { return /piscina/i.test(x); }); }],
     ['amo', 'Amoblado', function (i) { return (i.x || []).some(function (x) { return /amoblado/i.test(x); }); }],
-    ['mas', 'Admite mascotas', function (i) { return i.ma === 'Sí'; }],
     ['est', 'Nuevo o para estrenar', function (i) { return i.co === 'Para estrenar' || i.co === 'Nuevo'; }]
   ];
   function exOn() { return Object.keys(S.ex).filter(function (k) { return S.ex[k]; }); }
@@ -1234,8 +1233,7 @@ img.bad{visibility:hidden}
     ['pis', 'Con piscina', { ex: { pis: true } }],
     ['a3', 'Arriendos hasta $3 M', { op: 'Arriendo', pr: 'A:3000000' }],
     ['fam', '3 habitaciones o más', { ha: '3' }],
-    ['amo', 'Amoblados', { ex: { amo: true } }],
-    ['mas', 'Admiten mascotas', { ex: { mas: true } }]
+    ['amo', 'Amoblados', { ex: { amo: true } }]
   ];
   function pintarColec(no) {
     var box = $('#colec'); if (!box) return;
