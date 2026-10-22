@@ -1841,27 +1841,43 @@ img.bad{visibility:hidden}
     requestAnimationFrame(f);
   }
 
-  /* ---------- Portada: fotos grandes de los mejores inmuebles (orden Recomendados) ---------- */
-  var heroT = 0, heroK = -1, heroL = [];
+  /* ---------- Portada: fotos grandes de los mejores inmuebles (orden Recomendados) ----------
+     Solo usa fotos con buena resolución (las de baja se ven borrosas en grande) y rota cada 7 s. */
+  var heroT = 0, heroK = -1, heroGen = 0;
   function pintarPortada() {
     var box = $('#hfoto'); if (!box || !S.d) return;
-    var L = disp().filter(function (i) { return (i.f || []).length; }).slice(0, 5), k = L.map(function (i) { return i.c + i.f[0]; }).join();
-    if (!L.length || box.getAttribute('data-k') === k) return;
-    box.setAttribute('data-k', k); heroL = L; heroK = -1; clearInterval(heroT);
-    var w = Math.min(2400, Math.round(Math.max(window.innerWidth || 1400, 900) * Math.min(window.devicePixelRatio || 1, 2)));
-    box.innerHTML = L.map(function (i) { return '<i data-src="' + img(i.f[0], w) + '"></i>'; }).join('');
-    var capa = $$('#hfoto i'), cap = $('#hcap');
-    var mostrar = function (n) {
-      var el = capa[n]; if (!el) return;
-      var go = function () {
-        capa.forEach(function (x, j) { x.classList.toggle('on', j === n); }); heroK = n;
-        var i = heroL[n]; if (cap && i) { cap.hidden = false; cap.href = '#' + i.c; cap.innerHTML = 'En la foto<b>' + esc(titulo(i)) + ' &rarr;</b>'; }
-      };
-      if (el.style.backgroundImage) return go();
-      var im = new Image(); im.onload = function () { el.style.backgroundImage = 'url("' + el.getAttribute('data-src') + '")'; go(); }; im.src = el.getAttribute('data-src');
+    var C = disp().filter(function (i) { return (i.f || []).length; }).slice(0, 16), k = C.map(function (i) { return i.c + i.f[0]; }).join();
+    if (!C.length || box.getAttribute('data-k') === k) return;
+    box.setAttribute('data-k', k); clearInterval(heroT); heroK = -1;
+    var gen = ++heroGen, vw = Math.max(window.innerWidth || 1400, 360), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.min(2400, Math.round(Math.max(vw, 900) * dpr)), minW = Math.min(1500, Math.round(vw * dpr * 0.85));
+    var ok = [], cap = $('#hcap'), p = 0, viejas = $$('#hfoto i'), mejor = null;
+    var poner = function (src, i) {
+      var el = document.createElement('i'); el.style.backgroundImage = 'url("' + src + '")'; box.appendChild(el);
+      ok.push({ el: el, i: i });
+      if (ok.length === 1) { viejas.forEach(function (v) { v.remove(); }); requestAnimationFrame(function () { mostrar(0); }); }
     };
-    mostrar(0);
-    if (capa.length > 1 && !RED) heroT = setInterval(function () { if (!document.hidden) mostrar((heroK + 1) % capa.length); }, 7000);
+    var mostrar = function (n) {
+      var x = ok[n]; if (!x) return; heroK = n;
+      $$('#hfoto i').forEach(function (el) { el.classList.toggle('on', el === x.el); });
+      if (cap) { cap.hidden = false; cap.href = '#' + x.i.c; cap.innerHTML = 'En la foto<b>' + esc(titulo(x.i)) + '&nbsp;&rarr;</b>'; }
+    };
+    var probar = function () {
+      if (gen !== heroGen || ok.length >= 5 || p >= C.length) {
+        if (gen === heroGen && !ok.length && mejor) poner(mejor.src, mejor.i);
+        if (gen === heroGen && ok.length > 1 && !RED) heroT = setInterval(function () { if (!document.hidden) mostrar((heroK + 1) % ok.length); }, 7000);
+        return;
+      }
+      var i = C[p++], src = img(i.f[0], w), im = new Image();
+      im.onload = function () {
+        if (gen !== heroGen) return;
+        if (im.naturalWidth >= minW) poner(src, i);
+        else if (!mejor || im.naturalWidth > mejor.w) mejor = { src: src, i: i, w: im.naturalWidth };
+        probar();
+      };
+      im.onerror = probar; im.src = src;
+    };
+    probar();
   }
   var statW = 0;
   function stats() {
