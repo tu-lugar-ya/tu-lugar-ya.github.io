@@ -119,7 +119,8 @@ img.bad{visibility:hidden}
 .modo-sel p,.modo-sel .hcta,.modo-sel .stats{display:none!important}
 
 /* Filtros */
-.fil{position:relative;z-index:2;margin-top:-44px;background:var(--hoja);border-radius:16px;box-shadow:0 18px 40px rgba(1,53,46,.13),0 2px 6px rgba(1,53,46,.06);padding:12px;display:grid;grid-template-columns:auto repeat(4,minmax(0,1fr));gap:10px;align-items:center}
+.fil{position:relative;z-index:2;margin-top:-44px;background:var(--hoja);border-radius:16px;box-shadow:0 18px 40px rgba(1,53,46,.13),0 2px 6px rgba(1,53,46,.06);padding:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:center}
+.fil .seg{grid-column:1/3}.fil .seg button{flex:1}.fil .sel-ba{grid-column:3/5}
 .seg{display:flex;background:var(--blanco);border-radius:10px;padding:4px;border:1px solid var(--linea)}
 .seg button{border:0;background:none;padding:9px 16px;border-radius:7px;font-weight:600;font-size:14px;color:var(--suave);white-space:nowrap;transition:background .2s,color .2s}
 .seg button[aria-pressed="true"]{background:var(--noche);color:#fff}
@@ -648,6 +649,7 @@ img.bad{visibility:hidden}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .fil{grid-template-columns:repeat(2,minmax(0,1fr))}
   .fil .seg{grid-column:1/-1}
+  .fil .sel-ba{grid-column:1/-1}
   .seg button{flex:1}
   .pasos{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -862,6 +864,7 @@ img.bad{visibility:hidden}
       <button type="button" data-v="Venta" aria-pressed="false">Comprar</button>
     </div>
     <button class="ftog" id="ftog" type="button" aria-expanded="false" aria-controls="fil">Filtros</button>
+    <label class="sel sel-ba"><span class="sr">Barrio</span><select id="fBa"></select></label>
     <label class="sel"><span class="sr">Ciudad</span><select id="fCi"></select></label>
     <label class="sel"><span class="sr">Tipo de inmueble</span><select id="fTi"></select></label>
     <label class="sel"><span class="sr">Precio máximo</span><select id="fPr"></select></label>
@@ -1138,6 +1141,20 @@ img.bad{visibility:hidden}
     ['amo', 'Amoblado', function (i) { return (i.x || []).some(function (x) { return /amoblado/i.test(x); }); }],
     ['est', 'Nuevo o para estrenar', function (i) { return i.co === 'Para estrenar' || i.co === 'Nuevo'; }]
   ];
+  function opcBarrios() {
+    var f = {}, gb = {}, k;
+    for (k in S) f[k] = S[k];
+    f.zb = '';
+    disp().forEach(function (i) {
+      if (!i.b || !coincide(i, f)) return;
+      var s = slug(i.b);
+      gb[s] = gb[s] || { s: s, b: i.b, ci: i.ci, n: 0 }; gb[s].n++;
+    });
+    if (S.zb && !gb[S.zb]) gb[S.zb] = { s: S.zb, b: S.zbN || S.zb, ci: '', n: 0 };
+    return '<option value="">Barrio</option>' + Object.keys(gb).map(function (s) { return gb[s]; }).sort(function (a, b) { return a.b.localeCompare(b.b, 'es'); }).map(function (x) {
+      return '<option value="' + esc(x.s) + '"' + (S.zb === x.s ? ' selected' : '') + '>' + esc(x.b) + (x.ci && x.ci !== 'Cali' ? ', ' + esc(x.ci) : '') + ' (' + x.n + ')</option>';
+    }).join('');
+  }
   function exOn() { return Object.keys(S.ex).filter(function (k) { return S.ex[k]; }); }
   var RA = [1e6, 1.5e6, 2e6, 3e6, 4e6, 6e6, 10e6], RV = [150e6, 250e6, 350e6, 500e6, 700e6, 1e9, 1.5e9];
   function opts(l, v, ph) { return '<option value="">' + ph + '</option>' + l.map(function (x) { var k = Array.isArray(x) ? x[0] : x, t = Array.isArray(x) ? x[1] : x; return '<option value="' + esc(k) + '"' + (String(k) === String(v) ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join(''); }
@@ -1146,16 +1163,17 @@ img.bad{visibility:hidden}
     var ciu = uniq(L.map(function (i) { return i.ci; })), tip = uniq(L.map(function (i) { return i.t; }));
     if (S.ci && ciu.indexOf(S.ci) < 0) S.ci = '';
     if (S.ti && tip.indexOf(S.ti) < 0) S.ti = '';
-    $('#fCi').innerHTML = opts(ciu, S.ci, 'Todas las ciudades');
-    $('#fTi').innerHTML = opts(tip, S.ti, 'Todos los tipos');
+    $('#fCi').innerHTML = opts(ciu, S.ci, 'Ciudad');
+    $('#fTi').innerHTML = opts(tip, S.ti, 'Tipo de inmueble');
     var og = function (t, r, p, mes) { return '<optgroup label="' + t + '">' + r.map(function (x) { var v = p + ':' + x; return '<option value="' + v + '"' + (S.pr === v ? ' selected' : '') + '>Hasta ' + copC(x) + (mes ? ' al mes' : '') + '</option>'; }).join('') + '</optgroup>'; };
-    $('#fPr').innerHTML = '<option value="">Cualquier precio</option>' + (S.op === 'Venta' ? og('Venta', RV, 'V') : S.op === 'Arriendo' ? og('Arriendo', RA, 'A', true) : og('Arriendo', RA, 'A', true) + og('Venta', RV, 'V'));
+    $('#fPr').innerHTML = '<option value="">Precio</option>' + (S.op === 'Venta' ? og('Venta', RV, 'V') : S.op === 'Arriendo' ? og('Arriendo', RA, 'A', true) : og('Arriendo', RA, 'A', true) + og('Venta', RV, 'V'));
+    $('#fBa').innerHTML = opcBarrios();
     $('#fHa').innerHTML = opts([[1, '1 habitación o más'], [2, '2 habitaciones o más'], [3, '3 habitaciones o más'], [4, '4 habitaciones o más']], S.ha, 'Habitaciones');
-    ['fCi', 'fTi', 'fPr', 'fHa'].forEach(function (id) { $('#' + id).classList.toggle('on', !!$('#' + id).value); });
+    ['fBa', 'fCi', 'fTi', 'fPr', 'fHa'].forEach(function (id) { $('#' + id).classList.toggle('on', !!$('#' + id).value); });
     $$('#fOp button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === S.op ? 'true' : 'false'); });
     $('#fMas').innerHTML = '<span>Más filtros:</span>' + EXTRA.filter(function (e) { var m = L.filter(e[2]).length; return S.ex[e[0]] || (m > 0 && m < L.length); }).map(function (e) { return '<button type="button" data-ex="' + e[0] + '" aria-pressed="' + !!S.ex[e[0]] + '">' + e[1] + '</button>'; }).join('');
     $('#fMas').hidden = $('#fMas').children.length < 2;
-    var n = [S.ci, S.ti, S.pr, S.ha].filter(Boolean).length + exOn().length;
+    var n = [S.ci, S.ti, S.pr, S.ha, S.zb].filter(Boolean).length + exOn().length;
     $('#ftog').textContent = n ? 'Filtros (' + n + ')' : 'Filtros';
   }
   function coincide(i, f) {
@@ -1685,6 +1703,7 @@ img.bad{visibility:hidden}
     return (S.yo ? 'Hola, soy ' + S.yo.nombre + '. ' : 'Hola. ') + 'Estoy buscando: ' + partesBusca(b).join(' · ') + (b.zona ? ' · Zona: ' + b.zona : '') + '. ¿Me avisan cuando tengan algo así?';
   }
   function avisame(b) {
+    var deS = !b;
     b = b || buscaDe(S); S.avb = b;
     $('#form').innerHTML = '<div class="lf" data-cerrar-form><form novalidate data-avisa><button class="cerrar" type="button" data-cerrar-form aria-label="Cerrar">' + X + '</button>' +
       '<h3>Te avisamos cuando llegue</h3><p>Guardamos tu búsqueda y te escribimos por WhatsApp apenas tengamos algo así.</p>' +
@@ -1693,6 +1712,7 @@ img.bad{visibility:hidden}
       camposDatos() +
       '<div class="er" id="lfE" role="alert"></div><button class="cta av" type="submit">Avísame</button>' +
       '<small>Solo usamos tus datos para contactarte sobre inmuebles. Al continuar aceptas nuestra <button type="button" class="lnkp" data-politica>política de datos</button>.</small></form></div>';
+    var zi = $('#avZ'); if (zi && deS && S.zb) zi.value = S.zbN;
     setTimeout(function () { var n = $('#avZ'); if (n) n.focus(); }, 30);
   }
   function avisarParecido(c) {
@@ -2456,6 +2476,13 @@ img.bad{visibility:hidden}
     if (e.key === 'Escape') { pedirCerrar(); return; }
     var g = $('#ficha .gal .car');
     if (g && (e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) { var m = g.children.length; ir(g, (idx(g) + (e.key === 'ArrowRight' ? 1 : -1) + m) % m, true); }
+  });
+  $('#fBa').addEventListener('change', function (e) {
+    var it;
+    S.zb = e.target.value; S.zbN = '';
+    if (S.zb) { it = disp().filter(function (i) { return slug(i.b) === S.zb; })[0]; S.zbN = it ? it.b : S.zb; }
+    if (ZONA) { try { history.replaceState(null, '', SITIO); } catch (er) {} }
+    pintarFiltros(); pintar();
   });
   ['fCi', 'fTi', 'fPr', 'fHa'].forEach(function (id) {
     $('#' + id).addEventListener('change', function (e) { S[{ fCi: 'ci', fTi: 'ti', fPr: 'pr', fHa: 'ha' }[id]] = e.target.value; pintarFiltros(); pintar(); });
