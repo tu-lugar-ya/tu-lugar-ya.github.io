@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comparte tu inventario | Tu Lugar Ya</title>
+<meta name="description" content="Para colegas e inmobiliarias: comparte tu inventario con Tu Lugar Ya. Lo publicamos, lo cruzamos con nuestros clientes y compartimos la comisión.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#01352E">
+<link rel="canonical" href="https://tu-lugar-ya.github.io/aliados/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tu Lugar Ya">
+<meta property="og:title" content="Comparte tu inventario con Tu Lugar Ya">
+<meta property="og:description" content="Tú tienes el inmueble, nosotros traemos el cliente. Comisión compartida y siempre sabes cómo va.">
+<meta property="og:url" content="https://tu-lugar-ya.github.io/aliados/">
+<meta property="og:image" content="https://tu-lugar-ya.github.io/og-aliados.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_CO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -10 80 80'%3E%3Crect x='-8' y='-10' width='80' height='80' rx='18' fill='%2301352E'/%3E%3Cpath d='M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z' fill='%23fff'/%3E%3Cpath d='M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z' fill='%2306F2D4'/%3E%3Ccircle cx='52' cy='10' r='6' fill='%2306F2D4'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://lh3.googleusercontent.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#01352E; --profundo:#013C30; --menta:#1CC99E; --aqua:#06F2D4; --blanco:#FBF9F7; --tinte:#D2EEE4;
+  --texto:#1D302B; --suave:#5B6F69; --linea:#E2EAE6; --hoja:#FFFFFF; --wa:#25D366;
+  --r:22px; --ancho:1160px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.55;color:var(--texto);background:var(--blanco);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3{text-wrap:balance;margin:0}
+.px{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.in{max-width:var(--ancho);margin:0 auto}
+.kick{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--menta)}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 24px;border-radius:999px;font-weight:700;font-size:15.5px;text-decoration:none;border:1.5px solid transparent;transition:transform .2s,filter .2s,background .2s,border-color .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-a{background:var(--aqua);color:var(--noche)}
+.btn-a:hover{filter:brightness(1.06)}
+.btn-l{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-l:hover{border-color:#fff}
+.btn-d{background:var(--noche);color:#fff}
+.btn-o{border-color:var(--linea);background:var(--hoja);color:var(--noche)}
+.btn-o:hover{border-color:var(--noche)}
+.wa-i{fill:var(--wa)}
+
+/* Encabezado */
+.top{position:sticky;top:0;z-index:20;background:rgba(1,53,46,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--noche);z-index:21}
+.top{top:env(safe-area-inset-top,0px)}
+.top .in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.marca{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.marca svg{width:34px;height:31px}
+.marca b{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.marca b span{color:var(--aqua)}
+.top nav{display:flex;align-items:center;gap:6px}
+.top nav a{color:#CFE3DD;text-decoration:none;font-weight:600;font-size:14.5px;padding:10px 12px;border-radius:999px}
+.top nav a:hover{color:#fff}
+.top .btn{min-height:42px;padding:9px 16px;font-size:14px}
+
+/* Portada */
+.hero{background:var(--noche);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-120px;bottom:-160px;width:520px;height:470px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 58'%3E%3Cpath d='M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z' fill='%23084238'/%3E%3Cpath d='M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z' fill='%23084238'/%3E%3C/svg%3E") no-repeat center/contain;opacity:.7;pointer-events:none}
+.hero .in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:56px;align-items:center;padding-block:72px 88px}
+.hero h1{font-size:clamp(38px,5.4vw,64px);font-weight:300;line-height:1.06;letter-spacing:-.035em;margin:18px 0 20px}
+.hero h1 em{font-style:normal;color:var(--aqua);font-weight:500}
+.hero p.lead{font-size:18px;color:#BFD9D2;max-width:520px;margin:0 0 32px}
+.acc{display:flex;flex-wrap:wrap;gap:12px}
+.fotos{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:12px;aspect-ratio:1.1;max-width:100%}
+.fotos figure{margin:0;border-radius:var(--r);overflow:hidden;background:#0B4A40;position:relative}
+.fotos figure:first-child{grid-row:1 / span 2}
+.fotos img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+.fotos img.ok{opacity:1}
+.fotos figcaption{position:absolute;left:12px;bottom:12px;background:rgba(1,53,46,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px}
+.fotos figcaption:empty{display:none}
+
+/* Franja de promesas */
+.tres{background:var(--hoja);border-bottom:1px solid var(--linea)}
+.tres ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.tres li{display:flex;gap:14px;align-items:flex-start;padding:26px 22px}
+.tres li + li{border-left:1px solid var(--linea)}
+.tres i{flex:none;width:44px;height:44px;border-radius:14px;background:var(--tinte);display:grid;place-items:center}
+.tres i svg{width:22px;height:22px;stroke:var(--noche);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tres b{display:block;font-size:16px;color:var(--noche)}
+.tres span{font-size:14px;color:var(--suave)}
+
+/* Secciones */
+section.s{padding-block:96px}
+.cab{max-width:720px;margin-bottom:44px}
+.cab h2{font-size:clamp(30px,3.8vw,46px);font-weight:300;letter-spacing:-.03em;line-height:1.1;color:var(--noche);margin-top:14px}
+.cab h2 em{font-style:normal;font-weight:600}
+.cab p{font-size:17px;color:var(--suave);margin:16px 0 0}
+
+.servicios{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.serv{background:var(--hoja);border:1px solid var(--linea);border-radius:var(--r);padding:28px 26px 26px;transition:transform .25s,box-shadow .25s}
+.serv:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(1,53,46,.35)}
+.serv i{width:48px;height:48px;border-radius:15px;background:var(--noche);display:grid;place-items:center;margin-bottom:20px}
+.serv i svg{width:24px;height:24px;stroke:var(--aqua);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.serv h3{font-size:18.5px;font-weight:600;color:var(--noche);letter-spacing:-.01em;margin-bottom:8px}
+.serv p{margin:0;color:var(--suave);font-size:15px}
+
+/* Cómo trabajamos */
+.como{background:var(--noche);color:#fff}
+.como .cab h2{color:#fff}
+.como .cab p{color:#BFD9D2}
+.pasos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:p}
+.pasos li{counter-increment:p;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:24px 20px;position:relative}
+.pasos li::before{content:counter(p);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--aqua);color:var(--noche);font-weight:700;margin-bottom:18px}
+.pasos b{display:block;font-size:16.5px;margin-bottom:6px}
+.pasos span{font-size:14.5px;color:#BFD9D2}
+
+/* Qué puedes esperar + informe de ejemplo */
+.esperar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:56px;align-items:center}
+.lista{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.lista li{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--linea)}
+.lista li:last-child{border-bottom:0}
+.lista svg{flex:none;width:24px;height:24px;margin-top:1px;stroke:var(--menta);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.lista b{display:block;color:var(--noche);font-size:16.5px}
+.lista span{color:var(--suave);font-size:15px}
+.inf{background:var(--hoja);border-radius:26px;box-shadow:0 30px 60px -30px rgba(1,53,46,.45),0 0 0 1px var(--linea);overflow:hidden;transform:rotate(1.2deg)}
+.inf-h{background:var(--noche);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.inf-h small{display:block;color:var(--aqua);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:11px}
+.inf-h b{font-size:17px;font-weight:600}
+.inf-h .marca svg{width:28px;height:26px}
+.inf-k{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:20px 24px 6px}
+.inf-k div{background:var(--blanco);border-radius:16px;padding:14px 12px;text-align:center}
+.inf-k b{display:block;font-size:28px;font-weight:600;color:var(--noche);line-height:1.1}
+.inf-k span{font-size:12.5px;color:var(--suave)}
+.inf-v{padding:10px 24px 4px;margin:0;list-style:none}
+.inf-v li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--linea);font-size:14px}
+.inf-v li:last-child{border-bottom:0}
+.inf-v em{font-style:normal;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;background:var(--tinte);color:var(--noche);white-space:nowrap;align-self:center}
+.inf-v em.o{background:#FFF1C9;color:#7A5A00}
+.inf-r{margin:12px 24px 24px;background:var(--tinte);border-radius:16px;padding:14px 16px;font-size:14px;color:var(--noche)}
+.inf-r b{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.ejl{display:block;text-align:center;font-size:12.5px;color:var(--suave);margin-top:14px}
+
+/* Comisión */
+.comi{background:var(--hoja);border-block:1px solid var(--linea)}
+.comi-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.precio{border-radius:var(--r);padding:32px 30px;background:var(--blanco);border:1px solid var(--linea)}
+.precio small{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:var(--menta)}
+.precio b{display:block;font-size:clamp(30px,3.4vw,42px);font-weight:300;letter-spacing:-.03em;color:var(--noche);margin:10px 0 6px;line-height:1.1}
+.precio b strong{font-weight:600}
+.precio p{margin:0;color:var(--suave);font-size:15px}
+.notas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}
+.notas p{margin:0;font-size:14.5px;color:var(--suave);padding-left:16px;border-left:3px solid var(--aqua)}
+.notas b{color:var(--noche)}
+
+/* Inmuebles publicados */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{display:block;text-decoration:none;background:var(--hoja);border-radius:var(--r);overflow:hidden;border:1px solid var(--linea);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(1,53,46,.35)}
+.card .ph{aspect-ratio:4/3;background:var(--tinte);position:relative;overflow:hidden}
+.card .ph img{width:100%;height:100%;object-fit:cover}
+.card .ph span{position:absolute;left:12px;top:12px;background:var(--noche);color:#fff;font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px}
+.card .bd{padding:16px 18px 18px}
+.card .p{font-size:20px;font-weight:600;color:var(--noche);letter-spacing:-.01em}
+.card .p small{font-size:13px;font-weight:500;color:var(--suave)}
+.card .t{font-size:15px;color:var(--texto);margin-top:2px}
+.card .d{font-size:13.5px;color:var(--suave);margin-top:6px}
+.cards-f{display:flex;justify-content:center;margin-top:28px}
+.cards:empty{display:none}
+
+/* Preguntas */
+.faq{max-width:820px}
+.faq details{border-bottom:1px solid var(--linea)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:22px 0;font-weight:600;font-size:17px;color:var(--noche)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:12px;height:12px;border-right:2px solid var(--noche);border-bottom:2px solid var(--noche);transform:rotate(45deg) translateY(-3px);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(-135deg) translateY(-3px)}
+.faq details p{margin:0 0 22px;color:var(--suave);max-width:680px}
+
+/* Cierre */
+.fin{background:var(--noche);color:#fff;text-align:center}
+.fin h2{font-size:clamp(32px,4.4vw,52px);font-weight:300;letter-spacing:-.035em;line-height:1.08}
+.fin h2 em{font-style:normal;color:var(--aqua);font-weight:500}
+.fin p{color:#BFD9D2;font-size:17px;margin:18px auto 32px;max-width:560px}
+.fin .acc{justify-content:center}
+footer{background:#012B25;color:#9FBDB5;font-size:14px}
+footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;align-items:center;padding-block:30px}
+footer a{color:#DCEDE8;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .ct{display:flex;flex-wrap:wrap;gap:6px 22px}
+
+/* Aparición suave */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.si{opacity:1;transform:none}
+
+@media (max-width:980px){
+  .hero .in{grid-template-columns:1fr;gap:40px;padding-block:48px 64px}
+  .fotos{aspect-ratio:1.35}
+  .servicios,.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pasos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pasos li:last-child{grid-column:1 / -1}
+  .esperar{grid-template-columns:1fr;gap:40px}
+  .inf{transform:none;max-width:520px}
+}
+@media (max-width:720px){
+  section.s{padding-block:64px}
+  .top nav a.tl{display:none}
+  .marca b{white-space:nowrap;font-size:17.5px}
+  .top .btn{white-space:nowrap;font-size:13px;padding:8px 13px;min-height:40px}
+  .top .btn-t{display:none}
+  .tres ul{grid-template-columns:1fr}
+  .tres li + li{border-left:0;border-top:1px solid var(--linea)}
+  .tres li{padding:18px 0}
+  .servicios,.cards,.comi-g,.notas,.pasos{grid-template-columns:1fr}
+  .pasos li:last-child{grid-column:auto}
+  .acc .btn{flex:1 1 100%}
+  .hero p.lead{font-size:16.5px}
+  .inf-k b{font-size:24px}
+}
+</style>
+</head>
+<body>
+<header class="top px">
+  <div class="in">
+    <a class="marca" href="../" aria-label="Tu Lugar Ya, inicio"><svg viewBox="0 0 64 58" aria-hidden="true"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z" fill="#fff"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z" fill="#06F2D4"/><circle cx="52" cy="10" r="6" fill="#06F2D4"/></svg><b>Tu Lugar <span>Ya</span></b></a>
+    <nav aria-label="Principal">
+      <a class="tl" href="#como">Cómo trabajamos</a>
+      <a class="tl" href="#comision">Comisión</a>
+      <a class="tl" href="../">Inmuebles</a>
+      <a class="btn btn-a" href="https://wa.me/573001483589" data-wa target="_blank" rel="noopener">Compartir<span class="btn-t">&nbsp;inventario</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero px">
+    <div class="in">
+      <div>
+        <span class="kick">Para colegas e inmobiliarias</span>
+        <h1>Tú tienes el inmueble. <em>Nosotros traemos el cliente.</em></h1>
+        <p class="lead">Publicamos tu inventario con fotos ordenadas y página propia, lo cruzamos con lo que buscan nuestros clientes y te escribimos cuando hay alguien interesado.</p>
+        <div class="acc">
+          <a class="btn btn-a" href="https://wa.me/573001483589" data-wa target="_blank" rel="noopener">Compartir mi inventario<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-l" href="#publicados">Así lo publicamos</a>
+        </div>
+      </div>
+      <div class="fotos" aria-hidden="true">
+        <figure><img alt="" data-foto="0"><figcaption></figcaption></figure>
+        <figure><img alt="" data-foto="1"><figcaption></figcaption></figure>
+        <figure><img alt="" data-foto="2"><figcaption></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="tres px">
+    <ul class="in">
+      <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.6 5 3 5 1.3 5 3.3-2.2 3.2-5 3.2-5-1.2-5-3"/></svg></i><div><b>Comisión compartida</b><span>Acordada antes de mostrarlo, por escrito.</span></div></li>
+      <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></i><div><b>Tu propietario es tuyo</b><span>Todo lo coordinamos contigo.</span></div></li>
+      <li><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/></svg></i><div><b>Siempre sabes cómo va</b><span>Cada visita, cada oferta y la liquidación.</span></div></li>
+    </ul>
+  </div>
+
+  <section class="s px" id="que">
+    <div class="in">
+      <div class="cab rv"><span class="kick">Qué hacemos con tu inventario</span><h2>Lo mostramos como si fuera <em>nuestro mejor inmueble.</em></h2></div>
+      <div class="servicios">
+        <article class="serv rv"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></i><h3>Publicación completa</h3><p>Fotos ordenadas, ficha con todos los datos y página propia en nuestro catálogo. La dirección nunca se publica.</p></article>
+        <article class="serv rv"><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></i><h3>Clientes que ya buscan</h3><p>Lo cruzamos con lo que nos piden nuestros clientes y se lo mandamos a quienes les encaja.</p></article>
+        <article class="serv rv"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg></i><h3>Visitas coordinadas contigo</h3><p>Te pedimos cada visita con fecha y hora, vamos con el cliente y te contamos cómo le fue.</p></article>
+        <article class="serv rv"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13l2 2 4-4"/></svg></i><h3>Constancia de visita</h3><p>El cliente firma que se lo mostramos. Protege la comisión de los dos.</p></article>
+        <article class="serv rv"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></i><h3>Liquidación clara</h3><p>Al cerrar te mandamos el valor, la comisión total y tu parte.</p></article>
+        <article class="serv rv"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg></i><h3>Inventario al día</h3><p>Te preguntamos si siguen disponibles con una lista numerada: respondes solo con los números.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s como px" id="como">
+    <div class="in">
+      <div class="cab rv"><span class="kick">Cómo trabajamos</span><h2>Cinco pasos, <em>sin vueltas.</em></h2><p>Tú sigues siendo el contacto del propietario. Nosotros traemos al cliente.</p></div>
+      <ol class="pasos">
+        <li class="rv"><b>Nos compartes</b><span>El link de Wasi, Finca Raíz o Domus, o el mensaje con las fotos.</span></li>
+        <li class="rv"><b>Acordamos la comisión</b><span>Cuánto se comparte, antes de mostrarlo.</span></li>
+        <li class="rv"><b>Lo publicamos</b><span>Te mandamos el link apenas queda listo.</span></li>
+        <li class="rv"><b>Visitas y ofertas</b><span>Te pedimos cada visita y te contamos cómo le fue.</span></li>
+        <li class="rv"><b>Cierre y liquidación</b><span>Te transferimos tu parte apenas recibimos el pago.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="s px" id="esperar">
+    <div class="in esperar">
+      <div>
+        <div class="cab rv" style="margin-bottom:22px"><span class="kick">Qué recibes</span><h2>Siempre sabes <em>cómo va tu inmueble.</em></h2></div>
+        <ul class="lista">
+          <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><div><b>El link apenas lo publicamos</b><span>Para que veas cómo quedó.</span></div></li>
+          <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><div><b>Cada visita, pedida y contada</b><span>Fecha y hora antes; cómo le fue y qué dijo el cliente después.</span></div></li>
+          <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><div><b>Cada oferta, presentada</b><span>Con el valor y los datos, para que la lleves al propietario.</span></div></li>
+          <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><div><b>La liquidación al cerrar</b><span>Valor, comisión total y tu parte.</span></div></li>
+          <li class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg><div><b>Un informe cuando lo pidas</b><span>Interesados, visitas y ofertas de cada inmueble, en PDF.</span></div></li>
+        </ul>
+      </div>
+      <div class="rv">
+        <div class="inf" aria-label="Ejemplo de lo que te llega por WhatsApp">
+          <div class="inf-h"><div><small>Por WhatsApp</small><b>Apartamento en Cristales</b></div><span class="marca" aria-hidden="true"><svg viewBox="0 0 64 58"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z" fill="#fff"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z" fill="#06F2D4"/><circle cx="52" cy="10" r="6" fill="#06F2D4"/></svg></span></div>
+          <ul class="inf-v">
+            <li><span>Lunes · Ya está publicado: te mandamos el link</span><em>Publicado</em></li>
+            <li><span>Miércoles · ¿Se puede mostrar el jueves a las 10 a. m.?</span><em>Visita</em></li>
+            <li><span>Jueves · «Le encantó la terraza»</span><em>Le gustó</em></li>
+            <li><span>Viernes · Ofreció $7.500.000</span><em class="o">Oferta</em></li>
+          </ul>
+          <div class="inf-r"><b>Liquidación</b>Canon $7.800.000 · Comisión total $7.800.000 · Tu parte (50 %) $3.900.000.</div>
+        </div>
+        <span class="ejl">Ejemplo con datos inventados.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="s comi px" id="comision">
+    <div class="in">
+      <div class="cab rv"><span class="kick">Comisión</span><h2>Clara desde el principio, <em>para los dos.</em></h2></div>
+      <div class="comi-g">
+        <div class="precio rv"><small>Tu inmueble, nuestro cliente</small><b><strong>Mitad y mitad</strong> de la comisión</b><p>Lo más común. Si tu acuerdo con el propietario es distinto, lo cuadramos antes de mostrarlo.</p></div>
+        <div class="precio rv"><small>Tu cliente, nuestro inmueble</small><b><strong>Te pasamos la ficha</strong> sin marca</b><p>Para que se la muestres a tu cliente. La comisión se comparte igual.</p></div>
+      </div>
+      <div class="notas">
+        <p class="rv"><b>Por escrito antes de mostrar.</b> Cuánto se comparte queda en el chat desde el primer día.</p>
+        <p class="rv"><b>Se paga cuando se cierra.</b> Apenas el propietario paga la comisión, te transferimos tu parte con la liquidación.</p>
+        <p class="rv"><b>Con constancia.</b> Cada visita queda firmada por el cliente: protege la comisión de los dos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="s px" id="publicados">
+    <div class="in">
+      <div class="cab rv"><span class="kick">Así lo publicamos</span><h2>Inmuebles que estamos <em>mostrando hoy.</em></h2></div>
+      <div class="cards" id="cards"></div>
+      <div class="cards-f"><a class="btn btn-o" href="../?o=aliados">Ver el catálogo completo</a></div>
+    </div>
+  </section>
+
+  <section class="s px" id="preguntas" style="padding-top:0">
+    <div class="in">
+      <div class="cab rv"><span class="kick">Preguntas frecuentes</span><h2>Lo que más nos <em>preguntan.</em></h2></div>
+      <div class="faq">
+        <details><summary>¿Sale mi marca o mi teléfono?</summary><p>No. En la página sale con Tu Lugar Ya y las consultas nos llegan a nosotros. Cuando hay un cliente de verdad, te escribimos para coordinar.</p></details>
+        <details><summary>¿Contactan al propietario?</summary><p>No. Todo lo coordinamos contigo: visitas, ofertas y cierre.</p></details>
+        <details><summary>¿Publican la dirección?</summary><p>No. Solo sale el barrio. La dirección la conoce el cliente cuando la visita está confirmada.</p></details>
+        <details><summary>¿Y si ya no está disponible?</summary><p>Nos avisas y lo quitamos. Además te preguntamos cada cierto tiempo, con una lista numerada, para tener el inventario al día.</p></details>
+        <details><summary>¿Cómo se paga la comisión?</summary><p>Cuando se cierra y el propietario paga, te transferimos tu parte y te mandamos la liquidación.</p></details>
+        <details><summary>¿En qué zonas trabajan?</summary><p>En Cali y sus alrededores.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="s fin px">
+    <div class="in rv">
+      <h2>¿Compartimos inventario? <em>Escríbenos.</em></h2>
+      <p>Mándanos tus inmuebles por WhatsApp y te avisamos apenas estén publicados.</p>
+      <div class="acc">
+        <a class="btn btn-l" href="https://wa.me/573001483589" data-wa target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="wa-i" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2.1.7 2.8.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3z"/></svg>Escríbenos por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="px">
+  <div class="in">
+    <a class="marca" href="../" aria-label="Tu Lugar Ya, inicio"><svg viewBox="0 0 64 58" aria-hidden="true"><path d="M8 26L30 8q2-1.6 4 0l10 8.5L26 31v19q0 2-2 2H12q-4 0-4-4z" fill="#fff"/><path d="M44 16.5L56 27q2 2 2 4v10q0 2-2 4L42 57q-2 1-2-2V34q0-2-2-3l-8-6.5z" fill="#06F2D4"/><circle cx="52" cy="10" r="6" fill="#06F2D4"/></svg><b>Tu Lugar <span>Ya</span></b></a>
+    <div class="ct">
+      <a href="https://wa.me/573001483589" data-wa target="_blank" rel="noopener">WhatsApp <span data-tel>300 148 3589</span></a>
+      <span>tulugarya@gmail.com</span>
+      <a href="https://www.instagram.com/tulugar.ya/" target="_blank" rel="noopener">Instagram @tulugar.ya</a>
+      <a href="../#datos">Tratamiento de datos</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var WA = '573001483589';
+  var MSG = 'Hola, soy colega y quiero compartir inventario con Tu Lugar Ya.';
+  function waLink() { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(MSG); }
+  function ponerWA() { [].forEach.call(document.querySelectorAll('[data-wa]'), function (a) { a.href = waLink(); }); }
+  ponerWA();
+
+  /* Aparición suave */
+  var rv = [].slice.call(document.querySelectorAll('.rv'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('si'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    rv.forEach(function (el, k) { el.style.transitionDelay = (k % 3) * 70 + 'ms'; io.observe(el); });
+  } else rv.forEach(function (el) { el.classList.add('si'); });
+
+  /* Fotos y ejemplos reales del catálogo */
+  function img(id, w) { return 'https://lh3.googleusercontent.com/d/' + encodeURIComponent(id) + '=w' + w; }
+  function mil(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function cop(n) { return '$' + mil(n); }
+  function esA(i) { return /rriendo/.test(i.n || ''); }
+  function esV(i) { return /Venta/.test(i.n || ''); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function precio(i) {
+    if (esA(i) && i.pc) return cop(i.pc) + ' <small>/mes</small>';
+    if (esV(i) && i.pv) return (/sobre planos/i.test(i.d || '') ? '<small>Desde</small> ' : '') + cop(i.pv);
+    return 'Consulta el precio';
+  }
+  function datos(i) { return [i.a ? String(i.a).replace('.', ',') + ' m²' : '', i.h ? i.h + ' hab.' : '', i.ba ? i.ba + (i.ba == 1 ? ' baño' : ' baños') : '', i.pq ? i.pq + ' parq.' : ''].filter(Boolean).join(' · '); }
+  function lugar(i) { return (i.t || 'Inmueble') + (i.b ? ' en ' + i.b : ''); }
+  fetch('../catalogo.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
+    if (d && /^\d{10,13}$/.test(String(d.whatsapp || ''))) { WA = String(d.whatsapp); ponerWA(); var t = document.querySelector('[data-tel]'); if (t && WA.length === 12) t.textContent = WA.slice(2, 5) + ' ' + WA.slice(5, 8) + ' ' + WA.slice(8); }
+    var L = ((d && d.inmuebles) || []).filter(function (i) { return i.e === 'Disponible' && !i.oc && i.f && i.f.length >= 4; });
+    if (!L.length) return;
+    var hero = L.slice(0, 3);
+    [].forEach.call(document.querySelectorAll('[data-foto]'), function (im) {
+      var i = hero[+im.getAttribute('data-foto')]; if (!i) return;
+      im.onload = function () { im.classList.add('ok'); };
+      im.src = img(i.f[0], 900);
+      im.nextElementSibling.textContent = lugar(i);
+    });
+    var resto = L.slice(3), A = resto.filter(esA), V = resto.filter(function (i) { return esV(i) && !esA(i); });
+    var sel = [A[0], V[0], A[1] || V[1]].filter(Boolean);
+    document.getElementById('cards').innerHTML = sel.map(function (i) {
+      return '<a class="card rv si" href="../i/' + encodeURIComponent(i.c) + '/?o=aliados"><div class="ph"><img src="' + img(i.f[0], 700) + '" alt="' + esc(lugar(i)) + '" loading="lazy"><span>' + (esA(i) && esV(i) ? 'Venta o arriendo' : esA(i) ? 'Arriendo' : 'Venta') + '</span></div>' +
+        '<div class="bd"><div class="p">' + precio(i) + '</div><div class="t">' + esc(lugar(i)) + '</div><div class="d">' + esc(datos(i)) + '</div></div></a>';
+    }).join('');
+  }).catch(function () {});
+})();
+</script>
+</body>
+</html>
