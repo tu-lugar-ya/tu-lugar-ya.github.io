@@ -196,6 +196,8 @@ def main():
             open(os.path.join(carpeta, 'index.html'), 'w', encoding='utf8').write(s)
             urls.append(url)
             nz += 1
+    if os.path.exists(os.path.join(SITIO, 'propietarios', 'index.html')):
+        urls.append(URL + 'propietarios/')
     hoy = (d.get('_t') or d.get('actualizado') or '')[:10]
     open(os.path.join(SITIO, 'sitemap.xml'), 'w', encoding='utf8').write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
