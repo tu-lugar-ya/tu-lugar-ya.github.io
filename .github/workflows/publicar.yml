@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.despliegue.outputs.page_url }}
+      url: ${{ steps.despliegue.outputs.page_url || steps.reintento.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -76,7 +76,19 @@ jobs:
         with:
           path: sitio
 
+      # A veces GitHub todavía no "ve" el sitio recién subido y el primer intento falla
+      # ("No artifacts named github-pages were found"). Se espera un momento y se reintenta.
       - name: Publicar
         id: despliegue
         if: github.event_name != 'schedule' || steps.datos.outputs.cambio == 'true'
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+
+      - name: Esperar antes de reintentar
+        if: steps.despliegue.outcome == 'failure'
+        run: sleep 45
+
+      - name: Publicar (segundo intento)
+        id: reintento
+        if: steps.despliegue.outcome == 'failure'
         uses: actions/deploy-pages@v5
